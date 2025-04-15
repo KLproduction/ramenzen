@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { db } from "@/lib/db";
@@ -15,6 +17,8 @@ import LoginModalBtn from "./LoginModalBtn";
 import { getUserById } from "@/data/user";
 import { UserRole } from "@prisma/client";
 import Logo from "../global/Logo";
+import { ExtenderUser } from "@/next-auth";
+import { useEffect, useState } from "react";
 
 const navList = [
   {
@@ -38,17 +42,44 @@ const navList = [
     path: "/partners",
   },
 ];
-
-const Navbar = async () => {
-  const user = await currentUser();
-
+type Props = {
+  user: ExtenderUser | null;
+};
+const Navbar = ({ user }: Props) => {
   const isAdmin = user?.role === UserRole.ADMIN ? true : false;
   const isOrganizer = user?.role === UserRole.ORGANIZER ? true : false;
 
   const isDashboard = isAdmin || isOrganizer;
+  const [isNavOpen, setIsNavOpen] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY < lastScrollY) {
+      setIsNavOpen(true);
+    } else {
+      setIsNavOpen(false);
+    }
+
+    setLastScrollY(currentScrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-[100] h-20 w-full bg-black/20 backdrop-blur-md transition-all">
+    <nav
+      className={cn(
+        "fixed inset-x-0 top-0 z-[100] h-20 w-full bg-black/75 backdrop-blur-md transition-all duration-75 ease-in-out",
+        isNavOpen ? "top-0" : "-top-[100vh]",
+      )}
+    >
       <MyContainer>
         <ul className="flex items-center justify-between">
           <Logo className="max-w-[500px]" />

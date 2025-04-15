@@ -9,6 +9,7 @@
   position: relative;
   background-image: radial-gradient(#fff3, transparent 50%);
   margin-top: -50px;
+  background-color: rgba(252, 194, 5, 0.965);
 }
 .slider .list {
   position: absolute;

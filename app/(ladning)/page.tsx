@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import Hero from "./_components/Hero";
 import ProductSlider from "./_components/ProductSlider/Productslider";
+import About from "./_components/About";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -29,6 +30,9 @@ export default function LandingPage() {
       <Hero />
       <div>
         <ProductSlider />
+      </div>
+      <div>
+        <About />
       </div>
     </div>
   );

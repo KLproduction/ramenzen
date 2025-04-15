@@ -1,10 +1,10 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import "./product-slider.css";
 import { Button } from "@/components/ui/button";
 
-type Props = {};
-
-const ProductSlider = (props: Props) => {
+const ProductSlider = () => {
   const [active, setActive] = useState(1);
   const listRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<NodeListOf<HTMLDivElement>>();
@@ -61,7 +61,7 @@ const ProductSlider = (props: Props) => {
   }, []);
 
   return (
-    <div className="slider bg-yellow-400">
+    <div className="slider">
       <div className="list" ref={listRef}>
         <div className="item">
           <img src="1.png" />
@@ -79,15 +79,15 @@ const ProductSlider = (props: Props) => {
           <img src="5.png" />
         </div>
       </div>
-      <div className="circle" ref={circleRef}>
+      <div className="circle sm:text-md text-xs md:text-lg" ref={circleRef}>
         Discover the true taste of Japan in the heart of Bristol. At Ramen Zen
       </div>
       <div className="content">
-        <h1 className="caption text-4xl text-zinc-800 sm:text-8xl">
+        <h1 className="caption text-4xl text-zinc-800 sm:text-6xl">
           RAMEN ZEN
         </h1>
         <Button className="bg-zinc-800" size={"lg"}>
-          <h4 className="text-zinc-50">See More</h4>
+          <h4 className="text-zinc-50">Menu</h4>
         </Button>
       </div>
       <div className="arow">
