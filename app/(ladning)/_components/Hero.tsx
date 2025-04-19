@@ -25,7 +25,7 @@ const Hero = () => {
   const bgColorOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [0, 0, 1]);
 
   return (
-    <section className={cn("h-[875vh] w-full")} ref={targetRef}>
+    <section className={cn("h-[300vh] w-full")} ref={targetRef}>
       <motion.div className="sticky top-0 flex h-screen w-full items-start justify-center overflow-hidden bg-zinc-800">
         <div className="relative top-[55%] h-full w-full">
           <motion.img

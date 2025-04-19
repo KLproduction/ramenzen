@@ -13,36 +13,27 @@ const About = () => {
     target: targetRef,
     offset: ["start start", "end end"],
   });
-  const characters = ["手", "打", "ち", "麺"];
+  // const characters = ["手", "打", "ち", "麺"];
 
-  const containerVariants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.2, // Delay between each character
-      },
-    },
-  };
+  // const containerVariants = {
+  //   hidden: {},
+  //   show: {
+  //     transition: {
+  //       staggerChildren: 0.2, // Delay between each character
+  //     },
+  //   },
+  // };
 
-  const charVariants = {
-    hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0 },
-  };
+  // const charVariants = {
+  //   hidden: { opacity: 0, y: 50 },
+  //   show: { opacity: 1, y: 0 },
+  // };
+
   return (
     <motion.section
       ref={targetRef}
       className="relative h-screen w-full overflow-hidden bg-zinc-800"
     >
-      {/* <div className="absolute right-0 top-0 z-10 h-24 w-full bg-zinc-500">
-        <MyContainer>
-          <div className="flex h-full items-center justify-between">
-            <div>HOME</div>
-            <div>HOME</div>
-            <div>HOME</div>
-            <div>HOME</div>
-          </div>
-        </MyContainer>
-      </div> */}
       <motion.div
         className="absolute left-0 top-0 h-full w-1/2 bg-zinc-800"
         whileInView={{ opacity: [0, 1] }}
@@ -54,25 +45,6 @@ const About = () => {
             className="h-full w-auto object-cover opacity-50"
             alt=""
           />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <motion.div
-              className="flex flex-col items-center justify-center text-zinc-50"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: false, amount: 0.5 }}
-            >
-              {characters.map((char, i) => (
-                <motion.div
-                  key={i}
-                  className="z-20 text-8xl font-bold"
-                  variants={charVariants}
-                >
-                  {char}
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
         </motion.div>
       </motion.div>
 
@@ -117,3 +89,25 @@ const About = () => {
 };
 
 export default About;
+
+{
+  /* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <motion.div
+              className="flex flex-col items-center justify-center text-zinc-50"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: false, amount: 0.5 }}
+            >
+              {characters.map((char, i) => (
+                <motion.div
+                  key={i}
+                  className="z-20 text-8xl font-bold"
+                  variants={charVariants}
+                >
+                  {char}
+                </motion.div>
+              ))}
+            </motion.div>
+          </div> */
+}

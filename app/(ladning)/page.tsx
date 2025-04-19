@@ -4,7 +4,10 @@ import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import Hero from "./_components/Hero";
 import ProductSlider from "./_components/ProductSlider/Productslider";
-import About from "./_components/About";
+import SecCaption from "./_components/SecCaption";
+import { InfoBar } from "./_components/info-bar/InfoBar";
+import Booking from "./_components/booking/Booking";
+import Category from "./_components/Category/Category";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -28,12 +31,15 @@ export default function LandingPage() {
   return (
     <div className="h-full w-full bg-white">
       <Hero />
-      <div>
-        <ProductSlider />
+      <ProductSlider />
+      <Category />
+      <div className="relative w-full">
+        <SecCaption />
+        <div className="absolute -bottom-16 left-1/2 z-[1000] w-full -translate-x-1/2">
+          <InfoBar />
+        </div>
       </div>
-      <div>
-        <About />
-      </div>
+      <Booking />
     </div>
   );
 }

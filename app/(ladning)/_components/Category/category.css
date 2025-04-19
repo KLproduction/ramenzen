@@ -1,0 +1,17 @@
+@keyframes rotate-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.hover-rotate {
+  animation: rotate-slow 5s linear infinite;
+  animation-play-state: paused;
+}
+
+.group:hover .hover-rotate {
+  animation-play-state: running;
+}

@@ -20,9 +20,18 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "RiiT";
+  src: url("/RiiT-F-2.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 .caption {
   font-family: "Kamikaze3DGradient", sans-serif;
+}
+.caption2 {
+  font-family: "RiiT", sans-serif;
 }
 h4 {
   font-family: "Nuku1", sans-serif;
