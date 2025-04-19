@@ -76,7 +76,7 @@ const UserAvatar = ({
       <DropdownMenuContent
         sideOffset={12}
         align="center"
-        className="z-[99999] bg-zinc-50"
+        className="z-[99999] rounded-none bg-zinc-50"
       >
         <DropdownMenuItem
           onClick={() => router.push(`/auth/setting`)}

@@ -76,8 +76,8 @@ const Navbar = ({ user }: Props) => {
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 top-0 z-[100] h-20 w-full bg-black/75 backdrop-blur-md transition-all duration-75 ease-in-out",
-        isNavOpen ? "top-0" : "-top-[100vh]",
+        "duration-900 fixed inset-x-0 top-0 z-[100] h-20 w-full bg-black/75 backdrop-blur-md transition-all",
+        isNavOpen ? "top-0" : "-top-[10%]",
       )}
     >
       <MyContainer>
