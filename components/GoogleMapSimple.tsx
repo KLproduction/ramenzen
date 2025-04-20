@@ -1,6 +1,5 @@
 "use client";
 
-import { useGoogleLocation } from "@/hooks/create-course";
 import { Library, Loader } from "@googlemaps/js-api-loader";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { useRef, useEffect } from "react";
@@ -13,11 +12,10 @@ export type googleLat = {
 
 const containerStyle = {
   width: "100%",
-  height: "500px", // Ensure the map container has height
+  height: "100%", // Ensure the map container has height
 };
 
 const MyGoogleMapSimple = () => {
-  const { center } = useGoogleLocation();
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   const libs: Library[] = ["places", "maps", "marker"];
@@ -44,10 +42,10 @@ const MyGoogleMapSimple = () => {
         // Map options
         const mapOptions: google.maps.MapOptions = {
           center: {
-            lat: center?.location?.coordinates[0] || 0,
-            lng: center?.location?.coordinates[1] || 0,
+            lat: 51.495137499405764,
+            lng: -2.5738063960200077,
           },
-          zoom: 15,
+          zoom: 18,
           mapId: "MAP_ID", // Replace "MAP_ID" with your actual mapId or remove it if unused
         };
 
@@ -58,8 +56,8 @@ const MyGoogleMapSimple = () => {
         new Marker({
           map: map,
           position: {
-            lat: center?.location?.coordinates[0] || 0,
-            lng: center?.location?.coordinates[1] || 0,
+            lat: 51.495137499405764 - 0.00002,
+            lng: -2.5738063960200077 + 0.00005,
           },
         });
       };

@@ -8,6 +8,8 @@ import SecCaption from "./_components/SecCaption";
 import { InfoBar } from "./_components/info-bar/InfoBar";
 import Booking from "./_components/booking/Booking";
 import Category from "./_components/Category/Category";
+import About from "./_components/About";
+import ContactSection from "./_components/ContactSection";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -40,6 +42,7 @@ export default function LandingPage() {
         </div>
       </div>
       <Booking />
+      <ContactSection />
     </div>
   );
 }

@@ -18,8 +18,8 @@ const Booking = (props: Props) => {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.05]);
 
   return (
-    <div className="relative h-[200vh] w-full bg-zinc-900" ref={targetRef}>
-      {/* Sticky image */}
+    <div className="relative h-[150vh] w-full bg-zinc-900" ref={targetRef}>
+      {/*  image */}
       <motion.div className="sticky top-0 h-screen w-full overflow-hidden">
         <motion.img
           src="/bookingBG.jpg"
@@ -27,9 +27,21 @@ const Booking = (props: Props) => {
           className="h-full w-full object-cover brightness-75"
           style={{ scale: scale }}
         />
+        <motion.div
+          className="absolute left-[35%] top-1/2 z-50 flex h-full -translate-x-1/2 -translate-y-1/2 scale-125 scale-x-125 flex-col justify-center gap-10 text-8xl font-bold text-yellow-400"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.7 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          viewport={{ once: false, amount: 0.3 }}
+        >
+          <h1>予</h1>
+          <h1>約</h1>
+          <h1>す</h1>
+          <h1>る</h1>
+        </motion.div>
       </motion.div>
 
-      {/* Sliding panel */}
+      {/* Sliding form */}
       <motion.div className="absolute right-[5%] top-0 h-full w-1/2">
         <div className="flex h-full items-center justify-center">
           <div className="sticky top-[10%] overflow-hidden">

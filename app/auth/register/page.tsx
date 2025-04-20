@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 const RegisterPage = async () => {
   const session = await auth();
   if (session) {
-    redirect("/setting");
+    redirect("/");
   }
   return (
     <div className="flex h-screen w-full items-center justify-center bg-zinc-800">

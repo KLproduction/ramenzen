@@ -6,11 +6,12 @@ type Props = {
 
 const Logo = ({ className }: Props) => {
   return (
-    <div className="flex h-20 items-center justify-center bg-transparent">
+    <div className="flex h-20 items-center justify-center">
       <img
-        src="logo_noBG.png"
+        src="logo_noBGFix.png"
         alt="Logo"
         className={cn("object-fit h-full", className)}
+        style={{ backgroundColor: "transparent" }}
       />
     </div>
   );
