@@ -64,41 +64,6 @@ const Hero = () => {
             </h1>
           </motion.div>
         </div>
-        {/* <div className="relative h-full w-full top-[55%]">
-
-          <motion.img
-            src="ramen_noColor_noBGFix.png"
-            alt=""
-            style={{
-              opacity: noColorOpacity,
-            }}
-            className={cn(
-              "absolute left-1/2 top-0 z-10 w-2/3 -translate-x-1/2 -translate-y-1/2 lg:w-1/2",
-            )}
-          />
-          <motion.img
-            src="ramen_color_noBGFix.png"
-            alt=""
-            style={{
-              opacity: colorOpacity,
-            }}
-            className="absolute left-1/2 top-0 z-10 w-2/3 -translate-x-1/2 -translate-y-1/2 lg:w-1/2"
-          /> 
-
-   
-          <motion.div
-            className="absolute left-[25%] top-24 z-10 -translate-y-1/2 rounded-full sm:left-1/2 sm:-translate-x-1/2 md:left-1/3"
-            style={{
-              opacity: textOpacity,
-              // y: textY,
-              scale: scale,
-            }}
-          >
-            <h1 className="caption pointer-events-none overflow-hidden text-center text-2xl text-yellow-400 md:text-4xl lg:text-6xl">
-              RAMEN ZEN
-            </h1>
-          </motion.div>
-        </div> */}
 
         <motion.div
           className="absolute inset-0 z-[9999] min-h-screen min-w-full bg-yellow-400"
@@ -118,7 +83,7 @@ const Hero = () => {
         }}
       >
         <div className="flex flex-col items-center justify-center gap-3 text-yellow-400">
-          <h4 className="text-4xl">SCROLL</h4>
+          <h4 className="text-2xl md:text-4xl">SCROLL</h4>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-16 w-16 text-yellow-400"

@@ -10,6 +10,8 @@ import Booking from "./_components/booking/Booking";
 import Category from "./_components/Category/Category";
 import About from "./_components/About";
 import ContactSection from "./_components/ContactSection";
+import CategoryNav from "./_components/Category/CategoryNav";
+import MyFooter from "@/components/global/Footer";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -35,6 +37,7 @@ export default function LandingPage() {
       <Hero />
       <ProductSlider />
       <Category />
+      <CategoryNav />
       <div className="relative w-full">
         <SecCaption />
         <div className="absolute -bottom-16 left-1/2 z-[1000] w-full -translate-x-1/2">
@@ -43,6 +46,7 @@ export default function LandingPage() {
       </div>
       <Booking />
       <ContactSection />
+      <MyFooter />
     </div>
   );
 }

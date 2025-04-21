@@ -64,58 +64,51 @@ const ProductSlider = () => {
   return (
     <div className="relative min-h-screen w-full bg-zinc-900">
       <motion.div
-      // whileInView={{ x: ["-90%", 0], opacity: [0, 1] }}
-      // transition={{
-      //   duration: 1.5,
-
-      //   ease: [0.65, 0, 0.35, 1],
-      // }}
+        className="absolute left-[5%] top-[20%] z-10"
+        style={{ scaleY: 2 }}
       >
-        <div className="caption2 absolute left-[10%] top-[10%] z-10">
-          <h1 className="text-5xl text-zinc-50 drop-shadow-xl lg:text-8xl">
-            POPULAR
-          </h1>
-        </div>
-        <div className="slider">
-          <motion.div className="list" ref={listRef}>
-            <div className="item">
-              <img src="1.png" />
-            </div>
-            <div className="item active">
-              <img src="2.png" />
-            </div>
-            <div className="item">
-              <img src="3.png" />
-            </div>
-            <div className="item">
-              <img src="4.png" />
-            </div>
-            <div className="item">
-              <img src="5.png" />
-            </div>
-          </motion.div>
-          <div className="circle sm:text-md text-xs md:text-lg" ref={circleRef}>
-            Discover the true taste of Japan in the heart of Bristol. At Ramen
-            Zen
-          </div>
-          <div className="content">
-            <h1 className="caption text-4xl text-zinc-800 sm:text-6xl">
-              RAMEN ZEN
-            </h1>
-            <Button className="bg-zinc-800" size={"lg"}>
-              <h4 className="text-zinc-50">Menu</h4>
-            </Button>
-          </div>
-          <div className="arow">
-            <button id="prev" onClick={handlePrev}>
-              {"<"}
-            </button>
-            <button id="next" onClick={handleNext}>
-              {">"}
-            </button>
-          </div>
-        </div>
+        <h1 className="scale-y-150 text-end text-2xl font-bold text-yellow-200 opacity-70 drop-shadow-xl lg:text-6xl">
+          OUR POPULAR
+        </h1>
       </motion.div>
+      <div className="slider">
+        <motion.div className="list" ref={listRef}>
+          <div className="item">
+            <img src="1.png" />
+          </div>
+          <div className="item active">
+            <img src="2.png" />
+          </div>
+          <div className="item">
+            <img src="3.png" />
+          </div>
+          <div className="item">
+            <img src="4.png" />
+          </div>
+          <div className="item">
+            <img src="5.png" />
+          </div>
+        </motion.div>
+        <div className="circle sm:text-md text-xs md:text-lg" ref={circleRef}>
+          Discover the true taste of Japan in the heart of Bristol. At Ramen Zen
+        </div>
+        <div className="content">
+          <h1 className="caption text-4xl text-zinc-800 sm:text-6xl">
+            RAMEN ZEN
+          </h1>
+          <Button className="bg-zinc-800" size={"lg"}>
+            <h4 className="text-zinc-50">Menu</h4>
+          </Button>
+        </div>
+        <div className="arow">
+          <button id="prev" onClick={handlePrev}>
+            {"<"}
+          </button>
+          <button id="next" onClick={handleNext}>
+            {">"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

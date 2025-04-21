@@ -6,10 +6,9 @@ import { useRef, useState } from "react";
 
 export const InfoBar = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 }); // Trigger once when 30% in view
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
   const [hasTriggered, setHasTriggered] = useState(false);
 
-  // Start count-up only once when in view
   if (isInView && !hasTriggered) setHasTriggered(true);
 
   const experience = useCountUp(15, hasTriggered);
@@ -30,17 +29,21 @@ export const InfoBar = () => {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="md:px-100 mx-auto flex max-w-6xl items-center justify-between rounded-[50px] bg-[#2d333f] px-4 py-8 text-center text-yellow-400"
+      className="mx-auto w-full max-w-6xl rounded-[30px] bg-zinc-700 px-4 py-8 text-center text-yellow-400 md:px-8"
     >
-      {stats.map((stat, idx) => (
-        <div
-          key={idx}
-          className="flex-1 border-r border-pink-200/20 px-4 last:border-none"
-        >
-          <p className="text-3xl font-semibold">{stat.value}+</p>
-          <p className="font-[cursive] text-sm">{stat.label}</p>
-        </div>
-      ))}
+      <div className="grid grid-cols-2 gap-y-8 sm:grid-cols-2 md:flex md:items-center md:justify-between">
+        {stats.map((stat, idx) => (
+          <div
+            key={idx}
+            className="w-full px-4 md:flex-1 md:border-r md:border-pink-200/20 md:last:border-none"
+          >
+            <p className="text-2xl font-bold md:text-3xl lg:text-4xl">
+              {stat.value}+
+            </p>
+            <p className="font-[cursive] text-sm md:text-base">{stat.label}</p>
+          </div>
+        ))}
+      </div>
     </motion.div>
   );
 };

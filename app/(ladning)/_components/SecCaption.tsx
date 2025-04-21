@@ -68,21 +68,20 @@ const SecCaption = (props: Props) => {
             <article className="caption2 flex justify-center px-6 py-12 text-yellow-400 md:scale-90 lg:scale-100">
               <div className="max-w-xl space-y-6 text-center">
                 <h3 className="font-semibold italic text-yellow-400 md:text-base lg:text-lg">
-                  RamenZen history
+                  RamenZen
                 </h3>
                 <h4 className="font-[cursive] font-bold leading-tight md:text-xl lg:text-4xl">
-                  Where Wishes Leave
-                  <br />
-                  Imprints on History
+                  Where Every Bowl Tells
+                  <br />a Story
                 </h4>
 
                 <p className="z-50 px-8 text-xs leading-relaxed text-yellow-400">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat.
+                  At RamenZen, we don’t just serve ramen — we serve moments of
+                  warmth, comfort, and connection. Crafted with tradition,
+                  simmered with soul, and seasoned with stories, every bowl
+                  invites you to slow down and savour life. Whether you're
+                  seeking peace in a storm or a spark of joy in your day, our
+                  ramen is here to nourish both body and spirit.
                 </p>
                 <div className="pt-6">
                   <img
