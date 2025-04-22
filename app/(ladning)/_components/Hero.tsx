@@ -47,7 +47,7 @@ const Hero = () => {
             )}
           />
           <motion.img
-            src="dashes.png"
+            src="dashes.PNG"
             alt=""
             style={{
               opacity: colorOpacity,

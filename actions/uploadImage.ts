@@ -14,7 +14,7 @@ export const uploadImage = async (fileData: File) => {
 export const deleteUploadcare = async (uuid: string) => {
   const uploadcareSimpleAuthSchema = new UploadcareSimpleAuthSchema({
     publicKey: process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!,
-    secretKey: process.env.NEXT_PUBLIC_UPLOADCARE_SECRET_KEY!,
+    secretKey: process.env.UPLOADCARE_SECRET_KEY!,
   });
 
   const result = await deleteFile(

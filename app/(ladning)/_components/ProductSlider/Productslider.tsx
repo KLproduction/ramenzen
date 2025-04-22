@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./product-slider.css";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ProductSlider = () => {
   const [active, setActive] = useState(1);
@@ -13,6 +13,16 @@ const ProductSlider = () => {
   const [widthItem, setWidthItem] = useState(0);
 
   const count = 5;
+  const titles = [
+    "Chashu Ramen",
+    "Lasksa Seafood Ramen",
+    "Pork Katsu Curry with Rice",
+    "Seafood Ramen",
+    "Yakimeshi",
+  ];
+  const headingText = useMemo(() => {
+    return titles[active] || "RAMEN ZEN";
+  }, [active]);
 
   useEffect(() => {
     if (listRef.current) {
@@ -93,9 +103,18 @@ const ProductSlider = () => {
           Discover the true taste of Japan in the heart of Bristol. At Ramen Zen
         </div>
         <div className="content">
-          <h1 className="caption text-4xl text-zinc-800 sm:text-6xl">
-            RAMEN ZEN
-          </h1>
+          <AnimatePresence mode="wait">
+            <motion.h4
+              key={active}
+              initial={{ opacity: 0, filter: "blur(4px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, filter: "blur(4px)" }}
+              transition={{ duration: 0.4 }}
+              className="mb-8 text-4xl text-zinc-800 sm:text-4xl"
+            >
+              {headingText}
+            </motion.h4>
+          </AnimatePresence>
           <Button className="bg-zinc-800" size={"lg"}>
             <h4 className="text-zinc-50">Menu</h4>
           </Button>
