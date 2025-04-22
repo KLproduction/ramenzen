@@ -5,6 +5,7 @@ import React, { useRef } from "react";
 import BookingForm from "./BookingForm";
 import { once } from "events";
 import { Button } from "@/components/ui/button";
+import { useBookingModal } from "@/hooks/modal";
 
 type Props = {};
 
@@ -17,6 +18,7 @@ const Booking = (props: Props) => {
   });
 
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.05]);
+  const { open } = useBookingModal();
 
   return (
     <div
@@ -54,6 +56,7 @@ const Booking = (props: Props) => {
         <Button
           className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2"
           size={"lg"}
+          onClick={() => open()}
         >
           <h4>BOOK NOW</h4>
         </Button>

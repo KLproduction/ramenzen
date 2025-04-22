@@ -118,39 +118,39 @@ export const getFavoritesAction = async (userId: string) => {
   }
 };
 
-export const getFavoritesByUserIdAction = async (userId: string) => {
-  try {
-    const userData = await db.user.findUnique({
-      where: {
-        id: userId,
-      },
-      select: {
-        favoriteIds: true,
-      },
-    });
+// export const getFavoritesByUserIdAction = async (userId: string) => {
+//   try {
+//     const userData = await db.user.findUnique({
+//       where: {
+//         id: userId,
+//       },
+//       select: {
+//         favoriteIds: true,
+//       },
+//     });
 
-    if (!userData) {
-      return { status: 404, message: "User not found" };
-    }
+//     if (!userData) {
+//       return { status: 404, message: "User not found" };
+//     }
 
-    const favoriteOrganizations = await Promise.all(
-      userData.favoriteIds.map(async (id) => {
-        const organization = await db.organization.findUnique({
-          where: { id },
-          include: { listings: true },
-        });
+//     const favoriteOrganizations = await Promise.all(
+//       userData.favoriteIds.map(async (id) => {
+//         const organization = await db.organization.findUnique({
+//           where: { id },
+//           include: { listings: true },
+//         });
 
-        return organization
-          ? { organization, status: 200 }
-          : { status: 404, message: "Organization not found" };
-      }),
-    );
+//         return organization
+//           ? { organization, status: 200 }
+//           : { status: 404, message: "Organization not found" };
+//       }),
+//     );
 
-    return {
-      favoriteOrganizations,
-      status: 200,
-    };
-  } catch (e) {
-    console.error(e);
-  }
-};
+//     return {
+//       favoriteOrganizations,
+//       status: 200,
+//     };
+//   } catch (e) {
+//     console.error(e);
+//   }
+// };
