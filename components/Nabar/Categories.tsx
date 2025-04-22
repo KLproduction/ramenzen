@@ -1,6 +1,5 @@
 "use client";
 
-import { courseTypes, features } from "@/data/data";
 import MyContainer from "../Container";
 
 import CategoryBox from "./CategoryBox";
@@ -51,7 +50,7 @@ const Categories = () => {
       )}
     >
       <MyContainer>
-        <div className="flex items-center justify-between overflow-x-auto pt-4">
+        {/* <div className="flex items-center justify-between overflow-x-auto pt-4">
           {courseTypes.map((item) => (
             <CategoryBox
               key={item.title}
@@ -60,7 +59,8 @@ const Categories = () => {
               selected={category === item.title}
             />
           ))}
-        </div>
+        </div> */}
+        <></>
       </MyContainer>
     </div>
   );

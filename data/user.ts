@@ -25,20 +25,3 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
-export const getFullInfoByUserId = async (id: string) => {
-  try {
-    const user = await db.user.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        enrollmentRequest: true,
-        organization: true,
-      },
-    });
-
-    return user;
-  } catch {
-    return null;
-  }
-};

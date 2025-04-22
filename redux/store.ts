@@ -2,39 +2,15 @@
 "use client";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import courseSlice, {
-  setCourseData,
-  resetCourseData,
-} from "./slice/create-courseSlice";
-import organizationSlice, {
-  setOrganizationData,
-  resetOrganizationData,
-  appendToGallery,
-  appendToFeature,
-  appendToFacility,
-  appendToRoomAmenities,
-} from "./slice/create-organizationSlice";
-import createEnrollmentSlice, {
-  setEnrollmentData,
-  resetEnrollmentRequestData,
-} from "./slice/create-enrollmentRequestSlice";
 
-import studentNationSlice from "./slice/create-organizationNationSlice";
-import socialMediaSlice from "./slice/create-organizationSocialMediaSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const rootReducer = combineReducers({
-  createCourse: courseSlice,
-  organization: organizationSlice,
-  studentNation: studentNationSlice,
-  socialMedia: socialMediaSlice,
-  createEnrollmentRequest: createEnrollmentSlice,
-});
+const rootReducer = combineReducers({});
 const persisConfig = {
   key: "root",
   storage,
-  whitelist: ["createCourse", "organization", "studentNation", "socialMedia"],
+  whitelist: [],
 };
 const persistedReducer = persistReducer(persisConfig, rootReducer);
 

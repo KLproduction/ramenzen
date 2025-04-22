@@ -23,7 +23,7 @@ const Hero = () => {
     [0, 0.5, 0.7, 0.9],
     ["200px", "200px", "0%", "0%"],
   );
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [1, 1, 2, 50]);
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [3, 3, 5, 50]);
 
   const bgColorOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [0, 0, 1]);
   const scrollIndicatorOpacity = useTransform(
@@ -62,7 +62,7 @@ const Hero = () => {
               scale: scale,
             }}
           >
-            <h1 className="caption text-center text-2xl text-yellow-400 md:text-4xl lg:text-6xl">
+            <h1 className="caption text-md text-center text-yellow-400 md:text-4xl lg:text-6xl">
               RAMENZEN
             </h1>
           </motion.div>
