@@ -61,6 +61,7 @@ export default function Category() {
             {categories.map((cat, i) => (
               <motion.div
                 key={i}
+                initial={{ opacity: 0 }}
                 whileInView={{ rotate: [0, 0, 0, 0, 0], opacity: [0, 1] }}
                 transition={{
                   duration: 0.5 * (i + 0.5),

@@ -84,11 +84,11 @@ const SecCaption = (props: Props) => {
                   ramen is here to nourish both body and spirit.
                 </p>
                 <div className="pt-6">
-                  <img
+                  {/* <img
                     src="/signature.png"
                     alt="Signature"
                     className="mx-auto h-16"
-                  />
+                  /> */}
                   <p className="mt-2 font-medium italic">Owner of RamenZen</p>
                 </div>
               </div>
