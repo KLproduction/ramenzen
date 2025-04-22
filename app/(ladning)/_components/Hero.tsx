@@ -1,10 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { useBookingModal } from "@/hooks/modal";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useRef } from "react";
 
 const Hero = () => {
+  const { open } = useBookingModal();
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const { scrollYProgress } = useScroll({
@@ -66,13 +69,12 @@ const Hero = () => {
         </div>
 
         <motion.div
-          className="absolute inset-0 z-[9999] min-h-screen min-w-full bg-yellow-400"
+          className="absolute inset-0 z-[999] min-h-screen min-w-full bg-yellow-400"
           style={{
             opacity: bgColorOpacity,
           }}
         />
       </motion.div>
-
       {/* scroll icon */}
       <motion.div
         className="pointer-events-none sticky bottom-10 left-1/2 right-1/2 z-20 -translate-x-1/2 -translate-y-1/2"

@@ -9,6 +9,10 @@ import { ReduxProvider } from "@/redux/provider";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { LoginModal } from "@/components/auth/LoginModal";
 import { Analytics } from "@vercel/analytics/next";
+import BookingModal from "@/components/modals/BookingModal";
+import { currentUser } from "@/lib/auth";
+import Navbar from "@/components/Nabar/Navbar";
+import MobileNavbar from "@/components/Nabar/MobileNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +27,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
+  const user = await currentUser();
 
   return (
     <SessionProvider session={session}>
@@ -34,8 +39,11 @@ export default async function RootLayout({
                 <Toaster />
 
                 <LoginModal />
+                <Navbar user={user || null} />
+                <MobileNavbar user={user || null} />
                 {children}
                 <Analytics />
+                <BookingModal />
               </NuqsAdapter>
             </ReduxProvider>
           </ReactQueryProvider>

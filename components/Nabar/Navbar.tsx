@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "../ui/button";
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
@@ -12,13 +11,16 @@ import { cn } from "@/lib/utils";
 import MyContainer from "../Container";
 import Categories from "./Categories";
 import NavLogo from "./NavLogo";
-import ModalBtn from "./ModalBtn";
+
 import LoginModalBtn from "./LoginModalBtn";
 import { getUserById } from "@/data/user";
 import { UserRole } from "@prisma/client";
 import Logo from "../global/Logo";
 import { ExtenderUser } from "@/next-auth";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import BookingBtn from "../global/BookingBtn";
 
 const navList = [
   {
@@ -73,16 +75,20 @@ const Navbar = ({ user }: Props) => {
     };
   }, [lastScrollY]);
 
+  const route = useRouter();
+
   return (
     <nav
       className={cn(
-        "duration-900 fixed inset-x-0 top-0 z-[100] h-20 w-full bg-black/75 backdrop-blur-md transition-all",
+        "duration-900 fixed inset-x-0 top-0 z-[100] hidden h-20 w-full bg-black/75 backdrop-blur-md transition-all md:block",
         isNavOpen ? "top-0" : "-top-[10%]",
       )}
     >
       <MyContainer>
         <ul className="flex items-center justify-between">
-          <Logo className="max-w-[500px]" />
+          <Link href="/">
+            <Logo className="max-w-[500px]" />
+          </Link>
           {/* {navList.map(({ label, path }) => (
             <li key={label}>
               <Link
@@ -97,7 +103,7 @@ const Navbar = ({ user }: Props) => {
           {!user?.id ? (
             <div className="flex items-center gap-3 p-3">
               <LoginButtonProps mode="modal" asChild>
-                <Button variant={"default"} size={"lg"}>
+                <Button variant={"secondary"} size={"lg"}>
                   <h4>Sign In</h4>
                 </Button>
               </LoginButtonProps>
@@ -106,14 +112,10 @@ const Navbar = ({ user }: Props) => {
               <Link href={"/auth/register"} className="text-gray-500">
                 <h4>Sign up</h4>
               </Link>
+              <BookingBtn />
             </div>
           ) : (
             <div className="flex items-center justify-center gap-3 p-3">
-              <div className={cn("hidden sm:block")}>
-                <div className={isDashboard ? "" : "hidden"}></div>
-                <ModalBtn />
-              </div>
-
               <UserAvatar
                 name={user?.name!}
                 userId={user?.id}
@@ -121,6 +123,7 @@ const Navbar = ({ user }: Props) => {
                 isAdmin
                 isOrganizer
               />
+              <BookingBtn />
             </div>
           )}
         </ul>

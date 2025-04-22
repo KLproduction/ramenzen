@@ -11,9 +11,6 @@ const LandingLayout = async ({ children }: Props) => {
   const user = await currentUser();
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      <div className="hidden md:block">
-        <Navbar user={user || null} />
-      </div>
       <div className="md:hidden">{/* <MobileNavbar /> */}</div>
 
       {children}

@@ -1,12 +1,10 @@
-import MobileNavbar from "@/components/Nabar/MobileNavbar";
-import Navbar from "@/components/Nabar/Navbar";
+import { currentUser } from "@/lib/auth";
 
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
+  const user = await currentUser();
   return (
-    <div className="flex h-full items-center justify-center bg-zinc-300">
-      <Navbar />
-      <MobileNavbar />
-      {children}
+    <div className="flex h-full items-center justify-center bg-zinc-800">
+      <div className="mt-24 h-full w-full">{children}</div>
     </div>
   );
 };

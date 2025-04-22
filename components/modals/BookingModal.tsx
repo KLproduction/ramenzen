@@ -11,16 +11,12 @@ const BookingModal = () => {
 
   const bodyContent = (
     <div className="my-8">
-      <Card className="grid gap-6">
-        <CardContent className="p-6">
-          <BookingForm />
-        </CardContent>
-      </Card>
+      <BookingForm />
     </div>
   );
   return (
     <ResponsiveModel isOpen={isOpen} onOpenChange={setIsOpen}>
-      <Modal title="Accommodation Details" body={bodyContent} />
+      <Modal body={bodyContent} />
     </ResponsiveModel>
   );
 };

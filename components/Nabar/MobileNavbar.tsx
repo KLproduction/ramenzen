@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { LoginButtonProps } from "../auth/loginBtn";
@@ -6,8 +8,10 @@ import UserAvatar from "../global/UserAvatar";
 import { cn } from "@/lib/utils";
 import MyContainer from "../Container";
 import Categories from "./Categories";
-import ModalBtn from "./ModalBtn";
 import { UserRole } from "@prisma/client";
+import Logo from "../global/Logo";
+import { useEffect, useState } from "react";
+import { ExtenderUser } from "@/next-auth";
 
 const navList = [
   {
@@ -31,14 +35,44 @@ const navList = [
     path: "/partners",
   },
 ];
-
-const MobileNavbar = async () => {
-  const user = await currentUser();
+type Props = {
+  user: ExtenderUser | null;
+};
+const MobileNavbar = ({ user }: Props) => {
   const isAdmin = user?.role === UserRole.ADMIN ? true : false;
   const isOrganizer = user?.role === UserRole.ORGANIZER ? true : false;
 
+  const [isNavOpen, setIsNavOpen] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY < lastScrollY) {
+      setIsNavOpen(true);
+    } else {
+      setIsNavOpen(false);
+    }
+
+    setLastScrollY(currentScrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
-    <nav className="fixed inset-x-0 top-0 z-[100] h-20 w-full bg-white/75 backdrop-blur-md transition-all">
+    <nav
+      className={cn(
+        "fixed inset-x-0 top-0 z-[100] h-20 w-full bg-black/75 backdrop-blur-md transition-all md:hidden",
+
+        isNavOpen ? "top-0" : "-top-[10%]",
+      )}
+    >
       <MyContainer>
         <ul className="flex h-full items-center justify-between">
           {/* {navList.map(({ label, path }) => (
@@ -47,11 +81,9 @@ const MobileNavbar = async () => {
           </li>
         ))} */}
           <div>
-            <h2 className={cn("text-6xl font-bold text-rose-500")}>
-              <Link href="/">
-                <h4>AMIO</h4>
-              </Link>
-            </h2>
+            <Link href="/">
+              <Logo />
+            </Link>
           </div>
 
           {!user?.id ? (
@@ -69,12 +101,6 @@ const MobileNavbar = async () => {
             </div>
           ) : (
             <div className="flex items-center justify-center gap-3 p-3">
-              <div className={cn("hidden sm:block")}>
-                <div className={cn(!isOrganizer && "hidden")}>
-                  <ModalBtn />
-                </div>
-              </div>
-
               <UserAvatar
                 name={user?.name!}
                 userId={user?.id}

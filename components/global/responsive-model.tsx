@@ -1,7 +1,13 @@
 import { useMedia } from "react-use";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
-import { Dialog, DialogContent } from "../ui/dialog";
-import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "../ui/dialog";
+import { Sheet, SheetContent } from "../ui/sheet";
+
 type Props = {
   children: React.ReactNode;
   isOpen: boolean;
@@ -13,14 +19,16 @@ const ResponsiveModel = ({ children, isOpen, onOpenChange }: Props) => {
   // const isDesktop = true;
   if (isDesktop) {
     return (
-      <Dialog open={isOpen} onOpenChange={onOpenChange}>
+      <Sheet open={isOpen} onOpenChange={onOpenChange}>
         <DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogTitle>
-        <DialogContent className="hide-scrollbar z-[9999] max-h-[85vh] w-full overflow-y-auto border-none p-0 sm:max-w-lg">
-          {children}
-        </DialogContent>
-      </Dialog>
+        <SheetContent className="hide-scrollbar z-[9999] h-full w-full overflow-y-auto rounded-2xl border-none p-0 sm:max-w-lg">
+          <div className="flex h-full items-center justify-center">
+            {children}
+          </div>
+        </SheetContent>
+      </Sheet>
     );
   }
 
@@ -30,7 +38,7 @@ const ResponsiveModel = ({ children, isOpen, onOpenChange }: Props) => {
         <DialogDescription></DialogDescription>
       </DrawerTitle>
       <DrawerContent>
-        <div className="hide-scrollbar z-[99999] max-h-[70vh] overflow-y-auto pb-24">
+        <div className="hide-scrollbar z-[99999] max-h-[70vh] overflow-y-auto bg-zinc-900 pb-24">
           {children}
         </div>
       </DrawerContent>
