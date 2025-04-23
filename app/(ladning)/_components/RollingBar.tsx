@@ -82,7 +82,7 @@ const RollingBar = () => {
   return (
     <section
       ref={targetRef}
-      className="relative h-[200vh] w-full overflow-hidden bg-yellow-400 md:h-[300vh]"
+      className="relative h-[200vh] w-full overflow-hidden bg-yellow-400"
     >
       <motion.div
         className={cn(
