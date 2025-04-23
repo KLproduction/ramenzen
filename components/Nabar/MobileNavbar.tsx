@@ -70,7 +70,7 @@ const MobileNavbar = ({ user }: Props) => {
       className={cn(
         "fixed inset-x-0 top-0 z-[100] h-20 w-full bg-black/75 backdrop-blur-md transition-all md:hidden",
 
-        isNavOpen ? "top-0" : "-top-[10%]",
+        isNavOpen ? "top-0" : "-top-[50%]",
       )}
     >
       <MyContainer>

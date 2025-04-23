@@ -6,6 +6,7 @@ import BookingForm from "./BookingForm";
 import { once } from "events";
 import { Button } from "@/components/ui/button";
 import { useBookingModal } from "@/hooks/modal";
+import BookingBtn from "@/components/global/BookingBtn";
 
 type Props = {};
 
@@ -52,14 +53,8 @@ const Booking = (props: Props) => {
           <h1>る</h1>
         </motion.div>
       </motion.div>
-      <div className="sticky inset-0 top-0 h-screen w-full md:hidden">
-        <Button
-          className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2"
-          size={"lg"}
-          onClick={() => open()}
-        >
-          <h4>BOOK NOW</h4>
-        </Button>
+      <div className="inset-0 h-screen w-full md:hidden">
+        <BookingBtn className="absolute bottom-6 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2" />
       </div>
 
       {/* Sliding form */}

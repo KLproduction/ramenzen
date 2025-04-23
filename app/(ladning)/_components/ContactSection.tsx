@@ -24,7 +24,7 @@ const ContactSection = () => {
         <ContainerScroll
           titleComponent={
             <div className="flex flex-col gap-10">
-              <h1 className="scale-y-150 text-8xl font-bold text-yellow-100 opacity-70">
+              <h1 className="scale-y-150 text-4xl font-bold text-yellow-100 opacity-70 md:text-6xl lg:text-8xl">
                 CONTACT US
               </h1>
               <p className="mb-12 mt-1 text-xs font-bold leading-none md:text-xl">

@@ -72,7 +72,7 @@ const ProductSlider = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full bg-zinc-900">
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-yellow-400">
       <motion.div
         className="absolute left-[5%] top-[20%] z-10"
         style={{ scaleY: 2 }}
@@ -81,7 +81,7 @@ const ProductSlider = () => {
           OUR POPULAR
         </h1>
       </motion.div>
-      <div className="slider">
+      <div className="slider h-full">
         <motion.div className="list" ref={listRef}>
           <div className="item">
             <img src="1.png" />
@@ -99,7 +99,10 @@ const ProductSlider = () => {
             <img src="5.png" />
           </div>
         </motion.div>
-        <div className="circle sm:text-md text-xs md:text-lg" ref={circleRef}>
+        <div
+          className="circle sm:text-md text-[5px] md:text-lg"
+          ref={circleRef}
+        >
           Discover the true taste of Japan in the heart of Bristol. At Ramen Zen
         </div>
         <div className="content">
@@ -110,7 +113,7 @@ const ProductSlider = () => {
               animate={{ opacity: 1, filter: "blur(0px)" }}
               exit={{ opacity: 0, filter: "blur(4px)" }}
               transition={{ duration: 0.4 }}
-              className="mb-8 text-4xl text-zinc-800 sm:text-4xl"
+              className="mb-8 text-xs text-zinc-800 md:text-4xl"
             >
               {headingText}
             </motion.h4>

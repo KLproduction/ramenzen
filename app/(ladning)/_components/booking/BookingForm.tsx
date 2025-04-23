@@ -59,7 +59,7 @@ export default function BookingForm() {
 
   return (
     <div className="flex w-full items-center justify-center bg-fixed bg-center bg-no-repeat">
-      <Card className="my-12 w-full max-w-xl bg-transparent text-white backdrop-blur-md">
+      <Card className="my-12 w-full max-w-[280px] bg-transparent text-white backdrop-blur-md md:max-w-xl">
         <CardHeader className="text-center text-4xl font-black text-yellow-400">
           <h1 className="caption2 font-bold">BOOK YOUR EXPERIENCE</h1>
         </CardHeader>

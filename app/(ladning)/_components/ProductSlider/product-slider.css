@@ -129,7 +129,6 @@
   transform: translate(-50%, -50%) rotate(var(--rotate));
   text-transform: uppercase;
   color: #fff;
-  font-size: small;
   animation: circleRotate 20s linear infinite;
 }
 @keyframes circleRotate {

@@ -37,8 +37,8 @@ const ResponsiveModel = ({ children, isOpen, onOpenChange }: Props) => {
       <DrawerTitle>
         <DialogDescription></DialogDescription>
       </DrawerTitle>
-      <DrawerContent>
-        <div className="hide-scrollbar z-[99999] max-h-[70vh] overflow-y-auto bg-zinc-900 pb-24">
+      <DrawerContent className="flex w-full justify-center border-none bg-zinc-900 p-0">
+        <div className="hide-scrollbar z-[99999] flex max-h-screen w-full items-start justify-center overflow-y-auto overflow-x-hidden rounded-2xl border-none p-3 shadow-none">
           {children}
         </div>
       </DrawerContent>

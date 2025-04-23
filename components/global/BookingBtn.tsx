@@ -2,10 +2,13 @@ import React from "react";
 import { InteractiveHoverButton } from "../ui/interactive-hover-button";
 import { useBookingModal } from "@/hooks/modal";
 
-const BookingBtn = () => {
+type Props = {
+  className?: string;
+};
+const BookingBtn = ({ className }: Props) => {
   const { open } = useBookingModal();
   return (
-    <div>
+    <div className={className}>
       <InteractiveHoverButton
         onClick={open}
         text="Book Now"

@@ -16,12 +16,12 @@ const SecCaption = (props: Props) => {
   });
 
   const scale = useTransform(scrollYProgress, [0, 0.3], [10, 1.2]);
-  const bgColorOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const bgColorOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
   return (
     <motion.div
-      className="relative h-[180vh] w-full overflow-hidden bg-zinc-900"
+      className="relative hidden h-[180vh] w-full overflow-hidden bg-zinc-900 md:block"
       ref={targetRef}
     >
       <div className="relative h-full w-full">
