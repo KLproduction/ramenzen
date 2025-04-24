@@ -55,7 +55,7 @@ const Hero = () => {
             className="absolute inset-0 z-10 h-full w-full object-cover brightness-75"
           />
         </div>
-        <div className="pointer-events-none absolute left-0 top-32 z-20 flex h-[100vh] w-full flex-col items-center justify-center gap-5">
+        <div className="pointer-events-none absolute left-0 top-12 z-20 flex h-[100vh] w-full flex-col items-center justify-center gap-5 md:top-32">
           <motion.div>
             <h4 className="text-md lg:text-md text-center font-bold text-zinc-50 drop-shadow-lg md:text-4xl">
               True Taste of Japan in Bristol

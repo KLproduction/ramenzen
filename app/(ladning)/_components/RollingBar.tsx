@@ -38,7 +38,7 @@ const RollingGroup = ({
   );
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full overflow-hidden">
       <motion.div
         style={{ x }}
         className={`absolute top-0 ${reverse ? "right-0 justify-end" : "left-0"} flex w-fit gap-2 rounded-full sm:gap-3 md:gap-4`}
@@ -76,17 +76,17 @@ const RollingBar = () => {
   const scale = useTransform(
     scrollYProgress,
     [0, 0.2, 0.8, 1],
-    [1, 1, 1, isMobile ? 1.2 : 1.5],
+    [0.9, 0.9, 0.9, isMobile ? 1 : 1.5],
   );
 
   return (
     <section
       ref={targetRef}
-      className="relative h-[200vh] w-full overflow-hidden bg-yellow-400"
+      className="relative h-[300vh] w-full bg-yellow-400"
     >
       <motion.div
         className={cn(
-          "sticky flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden p-4 sm:gap-6 sm:p-6 md:gap-8 md:p-8 lg:gap-10 lg:p-12",
+          "sticky flex h-screen w-full flex-col items-center justify-center gap-4 sm:gap-6 sm:p-6 md:gap-8 md:p-8 lg:gap-10 lg:p-12",
           isMobile ? "top-24" : "top-0",
         )}
         style={{
