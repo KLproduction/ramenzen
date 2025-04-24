@@ -14,6 +14,7 @@ import CategoryNav from "./_components/Category/CategoryNav";
 import MyFooter from "@/components/global/Footer";
 import RollingBar from "./_components/RollingBar";
 import SecCaptionMobile from "./_components/(about-us)/SecCaptionMobile";
+import LandingBlog from "./_components/ladning-blog/LandingBlog";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -44,9 +45,10 @@ export default function LandingPage() {
       <div className="relative w-full">
         <SecCaption />
         <SecCaptionMobile />
-        <div className="absolute -bottom-16 left-1/2 z-[1000] w-full -translate-x-1/2">
+        {/* <div className="absolute -bottom-16 left-1/2 z-[1000] w-full -translate-x-1/2">
           <InfoBar />
-        </div>
+        </div> */}
+        <LandingBlog />
       </div>
       <Booking />
       <ContactSection />

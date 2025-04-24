@@ -70,14 +70,10 @@ const RollingBar = () => {
   const BGOpacity = useTransform(
     scrollYProgress,
     [0, 0.2, 0.9, 1],
-    [0, 0.5, 0.5, 0],
+    [0, 0.7, 0.9, 0],
   );
 
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [0.9, 0.9, 0.9, isMobile ? 1 : 1.5],
-  );
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, isMobile ? 1 : 1]);
 
   return (
     <section
@@ -86,7 +82,7 @@ const RollingBar = () => {
     >
       <motion.div
         className={cn(
-          "sticky flex h-screen w-full flex-col items-center justify-center gap-4 sm:gap-6 sm:p-6 md:gap-8 md:p-8 lg:gap-10 lg:p-12",
+          "sticky flex h-screen w-full flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10",
           isMobile ? "top-24" : "top-0",
         )}
         style={{

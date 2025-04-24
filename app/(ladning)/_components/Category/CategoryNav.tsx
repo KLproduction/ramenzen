@@ -70,7 +70,7 @@ export default function CategoryNav() {
                     </span>
                   </div>
                 </div>
-                <div className="absolute -bottom-[80%] left-1/2 right-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 transition-all duration-500">
+                <div className="pointer-events-none absolute -bottom-[80%] left-1/2 right-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 transition-all duration-500">
                   <motion.img
                     src={cat.image}
                     alt={cat.title}

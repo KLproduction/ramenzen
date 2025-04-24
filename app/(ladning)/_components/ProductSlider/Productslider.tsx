@@ -84,19 +84,19 @@ const ProductSlider = () => {
       <div className="slider h-full">
         <motion.div className="list" ref={listRef}>
           <div className="item">
-            <img src="1.png" />
+            <img src="1.png" alt="productSnapshot1" />
           </div>
           <div className="item active">
-            <img src="2.png" />
+            <img src="2.png" alt="productSnapshot2" />
           </div>
           <div className="item">
-            <img src="3.png" />
+            <img src="3.png" alt="productSnapshot3" />
           </div>
           <div className="item">
-            <img src="4.png" />
+            <img src="4.png" alt="productSnapshot4" />
           </div>
           <div className="item">
-            <img src="5.png" />
+            <img src="5.png" alt="productSnapshot5" />
           </div>
         </motion.div>
         <div

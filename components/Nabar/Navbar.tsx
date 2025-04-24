@@ -81,7 +81,7 @@ const Navbar = ({ user }: Props) => {
     <nav
       className={cn(
         "duration-900 fixed inset-x-0 top-0 z-[100] hidden h-20 w-full bg-black/75 backdrop-blur-md transition-all md:block",
-        isNavOpen ? "top-0" : "-top-[10%]",
+        isNavOpen ? "top-0" : "-top-[80px]",
       )}
     >
       <MyContainer>
