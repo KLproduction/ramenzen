@@ -145,7 +145,7 @@ export default function MyFooter() {
           </div>
 
           <div className="mt-12 border-t border-gray-700 pt-6 text-center text-gray-400">
-            <p>C© 2025 Shim-solution. All rights reserved.</p>
+            <p>© 2025 Shim-solution. All rights reserved.</p>
           </div>
         </div>
       </motion.footer>

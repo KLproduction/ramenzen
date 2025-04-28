@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
+import { InfoBar } from "./info-bar/InfoBar";
 
 const images = [
   "roll1.PNG",
@@ -34,7 +35,7 @@ const RollingGroup = ({
   const x = useTransform(
     scrollYProgress,
     [0, 1],
-    reverse ? ["0%", "80%"] : ["0%", "-80%"],
+    reverse ? ["0%", "60%"] : ["0%", "-60%"],
   );
 
   return (
@@ -44,7 +45,7 @@ const RollingGroup = ({
         className={`absolute top-0 ${reverse ? "right-0 justify-end" : "left-0"} flex w-fit gap-2 rounded-full sm:gap-3 md:gap-4`}
       >
         {images.map((img, i) => (
-          <img
+          <motion.img
             key={i}
             src={`/rolling/${img}`}
             alt={img.replace(".PNG", "")}
@@ -87,15 +88,22 @@ const RollingBar = () => {
         )}
         style={{
           opacity: BGOpacity,
-          scale: scale,
         }}
       >
         <RollingGroup images={firstHalf} scrollYProgress={scrollYProgress} />
+
         <RollingGroup
           images={secondHalf}
           scrollYProgress={scrollYProgress}
           reverse
         />
+        <div className="pointer-events-none absolute bottom-1/2 left-1/2 right-1/2 top-[15%] z-10 flex w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center sm:top-[32%] md:top-[43%] lg:top-[45%]">
+          <div className="sticky h-full w-full">
+            <motion.div className="mx-12" style={{ scale: scale }}>
+              <InfoBar />
+            </motion.div>
+          </div>
+        </div>
       </motion.div>
     </section>
   );

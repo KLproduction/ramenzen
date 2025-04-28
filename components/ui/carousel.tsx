@@ -65,12 +65,12 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   const { src, content, title } = slide;
 
   const isMobile = window.innerWidth < 768;
-  const maxLength = isMobile ? 80 : 140;
+  const maxLength = isMobile ? 80 : 150;
   const previewContent =
     content.length > maxLength ? content.slice(0, maxLength) + "..." : content;
 
   return (
-    <div className="[perspective:1200px] [transform-style:preserve-3d]">
+    <div className="cursor-pointer [perspective:1200px] [transform-style:preserve-3d]">
       <li
         ref={slideRef}
         className="relative z-10 mx-[4vmin] flex h-[70vmin] w-[70vmin] flex-1 flex-col items-center justify-center text-center text-white opacity-100 transition-all duration-300 ease-in-out"
@@ -87,7 +87,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
         }}
       >
         <div
-          className="absolute left-0 top-0 h-full w-full overflow-hidden rounded-[1%] bg-[#1D1F2F] transition-all duration-150 ease-out"
+          className="absolute left-0 top-0 h-full w-full overflow-hidden rounded-[1%] bg-yellow-700 transition-all duration-150 ease-out"
           style={{
             transform:
               current === index
@@ -103,8 +103,8 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
             alt={title}
             src={src}
             onLoad={imageLoaded}
-            loading="eager"
-            decoding="sync"
+            loading="lazy"
+            decoding="async"
           />
           {current === index && (
             <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />

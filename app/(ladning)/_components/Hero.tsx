@@ -45,6 +45,8 @@ const Hero = () => {
             className={cn(
               "absolute inset-0 z-10 h-full w-full object-cover brightness-75",
             )}
+            loading="eager"
+            decoding="sync"
           />
           <motion.img
             src="dashes.PNG"

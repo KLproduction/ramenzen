@@ -45,9 +45,7 @@ export default function LandingPage() {
       <div className="relative w-full">
         <SecCaption />
         <SecCaptionMobile />
-        {/* <div className="absolute -bottom-16 left-1/2 z-[1000] w-full -translate-x-1/2">
-          <InfoBar />
-        </div> */}
+
         <LandingBlog />
       </div>
       <Booking />

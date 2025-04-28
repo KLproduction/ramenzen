@@ -39,8 +39,10 @@ const LandingBlog = (props: Props) => {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-yellow-400">
       <div className="flex h-full w-full flex-col items-center">
-        <h4 className="mt-8 text-4xl md:text-6xl">Blog & Events</h4>
-        <div className="relative h-full w-full overflow-hidden py-20">
+        <h1 className="absolute left-12 top-4 z-50 mt-8 scale-y-150 text-8xl font-bold text-yellow-200 drop-shadow-lg md:text-6xl">
+          Blog & Events
+        </h1>
+        <div className="relative h-full w-full overflow-hidden py-32">
           <Carousel slides={slideData} />
         </div>
       </div>

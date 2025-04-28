@@ -15,7 +15,7 @@ const SecCaption = (props: Props) => {
     offset: ["start start", "end end"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.3], [10, 1.2]);
+  const scale = useTransform(scrollYProgress, [0, 0.3], [5, 1.2]);
   const bgColorOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
