@@ -39,7 +39,7 @@ const LandingBlog = (props: Props) => {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-yellow-400">
       <div className="flex h-full w-full flex-col items-center">
-        <h1 className="absolute left-12 top-4 z-50 mt-8 scale-y-150 text-8xl font-bold text-yellow-200 drop-shadow-lg md:text-6xl">
+        <h1 className="absolute left-12 top-4 mt-8 scale-y-150 text-2xl font-bold text-yellow-200 drop-shadow-lg md:text-6xl lg:text-8xl">
           Blog & Events
         </h1>
         <div className="relative h-full w-full overflow-hidden py-32">

@@ -31,7 +31,7 @@ export const InfoBar = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="mx-auto w-full max-w-6xl rounded-[30px] bg-black/75 px-4 py-8 text-center text-yellow-400 backdrop-blur-sm md:px-8"
     >
-      <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 md:flex md:items-center md:justify-between">
+      <div className="grid grid-cols-2 gap-y-8 sm:grid-cols-2 md:flex md:items-center md:justify-between">
         {stats.map((stat, idx) => (
           <div
             key={idx}

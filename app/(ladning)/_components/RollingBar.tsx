@@ -97,7 +97,7 @@ const RollingBar = () => {
           scrollYProgress={scrollYProgress}
           reverse
         />
-        <div className="pointer-events-none absolute bottom-1/2 left-1/2 right-1/2 top-[15%] z-10 flex w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center sm:top-[32%] md:top-[43%] lg:top-[45%]">
+        <div className="pointer-events-none absolute bottom-1/2 left-1/2 right-1/2 top-[25%] z-10 flex w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center sm:top-[32%] md:top-[43%] lg:top-[45%]">
           <div className="sticky h-full w-full">
             <motion.div className="mx-12" style={{ scale: scale }}>
               <InfoBar />
