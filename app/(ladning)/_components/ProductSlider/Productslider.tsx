@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import "./product-slider.css";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const ProductSlider = () => {
   const [active, setActive] = useState(1);
@@ -11,6 +12,7 @@ const ProductSlider = () => {
   const itemsRef = useRef<NodeListOf<HTMLDivElement>>();
   const circleRef = useRef<HTMLDivElement>(null);
   const [widthItem, setWidthItem] = useState(0);
+  const route = useRouter();
 
   const count = 5;
   const titles = [
@@ -118,7 +120,11 @@ const ProductSlider = () => {
               {headingText}
             </motion.h4>
           </AnimatePresence>
-          <Button className="bg-zinc-800" size={"lg"}>
+          <Button
+            className="bg-zinc-800"
+            size={"lg"}
+            onClick={() => route.push("/menu")}
+          >
             <h4 className="text-zinc-50">Menu</h4>
           </Button>
         </div>

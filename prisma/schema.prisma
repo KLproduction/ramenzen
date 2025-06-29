@@ -85,3 +85,27 @@ model TwoFactorConfirmation {
 
   @@unique([userId])
 }
+
+model Category {
+  id    String @id @default(uuid())
+  name  String @unique
+  menus Menu[]
+}
+
+model Menu {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  price       Float
+  image       String?
+  tag         String?
+  isAvailable Boolean   @default(true)
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  ingredients String[]
+  allergens   String[]
+  order       Int?
+  spicyLevel  Int?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

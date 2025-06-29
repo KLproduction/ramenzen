@@ -41,7 +41,7 @@ export default async function RootLayout({
                 <LoginModal />
                 <Navbar user={user || null} />
                 <MobileNavbar user={user || null} />
-                {children}
+                <div className="h-full w-full bg-yellow-500">{children}</div>
                 <Analytics />
                 <BookingModal />
               </NuqsAdapter>
