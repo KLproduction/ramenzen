@@ -1,7 +1,8 @@
 "use client";
 
-import { Library, Loader } from "@googlemaps/js-api-loader";
-import { useJsApiLoader } from "@react-google-maps/api";
+import { useJsApiLoader, type Libraries } from "@react-google-maps/api";
+import { Loader } from "@googlemaps/js-api-loader";
+
 import { useRef, useEffect } from "react";
 
 export type googleLat = {
@@ -18,12 +19,12 @@ const containerStyle = {
 const MyGoogleMapSimple = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
-  const libs: Library[] = ["places", "maps", "marker"];
+  const LIBRARIES: Libraries = ["places"];
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
-    libraries: libs,
+    libraries: LIBRARIES,
   });
 
   useEffect(() => {
