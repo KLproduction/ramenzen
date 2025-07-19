@@ -31,11 +31,23 @@ const GoogleMap = ({ lat, lng, className }: GoogleMapProps) => {
         zoom: 15,
       });
 
-      markerRef.current = new google.maps.Marker({
-        map: mapInstanceRef.current,
-        position: initialCenter,
-        title: "Location Marker",
-      });
+      // Use AdvancedMarkerElement if available, fallback to Marker
+      if (
+        google.maps.marker &&
+        typeof google.maps.marker.AdvancedMarkerElement === "function"
+      ) {
+        markerRef.current = new google.maps.marker.AdvancedMarkerElement({
+          map: mapInstanceRef.current!,
+          position: initialCenter,
+          title: "Location Marker",
+        }) as any;
+      } else {
+        markerRef.current = new google.maps.Marker({
+          map: mapInstanceRef.current!,
+          position: initialCenter,
+          title: "Location Marker",
+        });
+      }
     }
   }, [isLoaded, lat, lng]);
 
