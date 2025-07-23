@@ -15,6 +15,7 @@ import MyFooter from "@/components/global/Footer";
 import RollingBar from "./_components/RollingBar";
 import SecCaptionMobile from "./_components/(about-us)/SecCaptionMobile";
 import LandingBlog from "./_components/ladning-blog/LandingBlog";
+import MenuSection from "@/src/components/menu/MenuSection";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -39,13 +40,11 @@ export default function LandingPage() {
     <div className="h-full w-full bg-white">
       <Hero />
       <ProductSlider />
-      <Category />
-      <CategoryNav />
+      <MenuSection />
       <RollingBar />
       <div className="relative w-full">
         <SecCaption />
         <SecCaptionMobile />
-
         <LandingBlog />
       </div>
       <Booking />

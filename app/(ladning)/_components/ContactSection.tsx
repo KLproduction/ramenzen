@@ -19,16 +19,24 @@ const ContactSection = () => {
   const mapX = useTransform(scrollYProgress, [0, 0.3, 0.5], [0, 0, 100]);
 
   return (
-    <div className="h-[150vh] w-full bg-yellow-400">
-      <div className="flex flex-col overflow-hidden">
+    <div className="relative h-[150vh] w-full bg-yellow-400">
+      {/* Background image */}
+      <img
+        src="/inShop2.PNG"
+        alt="Shop background"
+        className="absolute inset-0 z-0 h-full w-full object-cover opacity-50 brightness-50"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-yellow-400 via-yellow-400/0 to-yellow-400" />
+
+      <div className="relative z-10 flex flex-col overflow-hidden">
         <ContainerScroll
           titleComponent={
             <div className="flex flex-col gap-10">
               <h1 className="scale-y-150 text-4xl font-bold text-yellow-100 opacity-70 md:text-6xl lg:text-8xl">
                 CONTACT US
               </h1>
-              <p className="mb-12 mt-1 text-xs font-bold leading-none md:text-xl">
-                365 Filton Ave, Horfield, Bristol BS7 0BD
+              <p className="mb-12 mt-1 text-xs font-bold leading-none text-zinc-200 md:text-xl">
+                Address: 365 Filton Ave, Horfield, Bristol BS7 0BD
               </p>
             </div>
           }
@@ -38,37 +46,14 @@ const ContactSection = () => {
       </div>
     </div>
   );
-  // return (
-  //   <motion.section
-  //     ref={targetRef}
-  //     className="h-[200vh] w-full bg-zinc-900 py-24"
-  //   >
-  //     <motion.div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center gap-16 px-4 md:px-12">
-  //       {/* Header */}
-  //       <motion.h4
-  //         style={{ scale: headerScale }}
-  //         className="mt-24 text-center text-4xl font-bold text-zinc-50 sm:text-5xl md:text-6xl"
-  //       >
-  //         Contact Us
-  //       </motion.h4>
-  //       {/* <motion.p
-  //         style={{ scale: headerScale }}
-  //         className="text-center text-lg font-medium text-zinc-100 md:text-2xl"
-  //       >
-  //         Tel: 07563 154 953
-  //       </motion.p> */}
-  //       {/* Contact Info */}
-
-  //       {/* Map or Image Section */}
-  //       <motion.div
-  //         style={{ scale: mapScale, x: mapX }}
-  //         className="z-50 h-full w-full max-w-3xl overflow-hidden rounded-2xl shadow-lg"
-  //       >
-  //         <MyGoogleMapSimple />
-  //       </motion.div>
-  //     </motion.div>
-  //   </motion.section>
-  // );
 };
 
 export default ContactSection;
+
+{
+  /* <img
+  src="/inShop2.PNG"
+  alt=""
+  className="absolute inset-0 z-0 h-full w-full object-cover brightness-75"
+/> */
+}

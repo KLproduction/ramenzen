@@ -16,7 +16,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <main className="container mx-auto py-8">
       <h1 className="mb-8 text-center text-4xl font-bold">{post.title}</h1>
       <img
-        src={post.src}
+        src={post.image}
         alt={post.title}
         className="mx-auto mb-8 max-w-xl rounded-lg"
       />
