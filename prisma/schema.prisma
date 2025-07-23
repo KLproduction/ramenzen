@@ -94,7 +94,7 @@ model Category {
 
 model Menu {
   id          String    @id @default(uuid())
-  name        String
+  name        String    @unique
   description String?
   price       Float
   image       String?
@@ -114,8 +114,10 @@ model BlogPost {
   id        String   @id @default(uuid())
   title     String
   content   String
-  src       String
+  image     String
   slug      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  author    String?
+  tags      String[]
 }

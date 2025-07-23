@@ -31,7 +31,7 @@ const GoogleMap = ({ lat, lng, className }: GoogleMapProps) => {
         zoom: 15,
       });
 
-      // Use AdvancedMarkerElement if available, fallback to Marker
+      // Only use AdvancedMarkerElement, skip marker if not available
       if (
         google.maps.marker &&
         typeof google.maps.marker.AdvancedMarkerElement === "function"
@@ -41,12 +41,6 @@ const GoogleMap = ({ lat, lng, className }: GoogleMapProps) => {
           position: initialCenter,
           title: "Location Marker",
         }) as any;
-      } else {
-        markerRef.current = new google.maps.Marker({
-          map: mapInstanceRef.current!,
-          position: initialCenter,
-          title: "Location Marker",
-        });
       }
     }
   }, [isLoaded, lat, lng]);
