@@ -1,5 +1,10 @@
 "use server";
+// Type guard for TagEnum
+function isTagEnum(value: string): value is TagEnum {
+  return Object.values(TagEnum).includes(value as TagEnum);
+}
 
+import { TagEnum } from "@prisma/client";
 import { MenuItem } from "@/data/type";
 import { db } from "@/lib/db";
 
@@ -49,7 +54,8 @@ export async function addSeedMenuAction(menuData: MenuItem[]) {
   // Seed blog posts
   for (const post of blogDemo) {
     try {
-      await db.blogPost.upsert({
+      // Upsert the blog post (without tags)
+      const blogPost = await db.blogPost.upsert({
         where: { slug: post.slug },
         update: {
           title: post.title,
@@ -57,7 +63,6 @@ export async function addSeedMenuAction(menuData: MenuItem[]) {
           image: post.image,
           createdAt: new Date(post.createdAt),
           author: post.author,
-          tags: post.tags,
         },
         create: {
           title: post.title,
@@ -66,9 +71,27 @@ export async function addSeedMenuAction(menuData: MenuItem[]) {
           slug: post.slug,
           createdAt: new Date(post.createdAt),
           author: post.author,
-          tags: post.tags,
         },
       });
+
+      // Remove existing tags for this post (to avoid duplicates)
+      await db.blogPostTag.deleteMany({ where: { blogPostId: blogPost.id } });
+
+      // Add tags via join table
+      if (Array.isArray(post.tags)) {
+        for (const tag of post.tags) {
+          if (isTagEnum(tag)) {
+            await db.blogPostTag.create({
+              data: {
+                blogPostId: blogPost.id,
+                tag,
+              },
+            });
+          } else {
+            console.warn(`Invalid tag '${tag}' for blog post '${post.title}'`);
+          }
+        }
+      }
     } catch (e) {
       console.error(
         `Failed to seed blog post '${post.title}': ${(e as Error).message}`,

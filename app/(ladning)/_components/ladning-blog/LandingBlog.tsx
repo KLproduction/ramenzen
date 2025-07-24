@@ -6,9 +6,12 @@ type Props = {};
 
 const LandingBlog = (props: Props) => {
   const slides = blogDemo.map((post) => ({
+    id: post.id,
     title: post.title,
     content: post.content,
-    src: post.image,
+    image: post.image,
+    slug: post.slug,
+    createdAt: post.createdAt,
   }));
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-yellow-400">

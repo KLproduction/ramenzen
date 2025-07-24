@@ -1,3 +1,27 @@
+// Tag enum for Japanese food
+enum TagEnum {
+  RAMEN
+  SUSHI
+  UDON
+  SOBA
+  DONBURI
+  TEMPURA
+  KATSU
+  CURRY
+  YAKITORI
+  OKONOMIYAKI
+  TAKOYAKI
+  MOCHI
+  MATCHA
+  BENTO
+  GYOZA
+  MISO
+  ONSEN_TAMAGO
+  SHABU_SHABU
+  SUKIYAKI
+  TSUKEMONO
+}
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -111,13 +135,22 @@ model Menu {
 }
 
 model BlogPost {
-  id        String   @id @default(uuid())
+  id        String        @id @default(uuid())
   title     String
   content   String
   image     String
-  slug      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  slug      String        @unique
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
   author    String?
-  tags      String[]
+  blogTags  BlogPostTag[]
+}
+
+model BlogPostTag {
+  id         String   @id @default(uuid())
+  blogPost   BlogPost @relation(fields: [blogPostId], references: [id])
+  blogPostId String
+  tag        TagEnum
+
+  @@unique([blogPostId, tag])
 }

@@ -120,11 +120,11 @@ nextjs-project/
 - Prefix boolean variables with verbs: `isLoading`, `hasError`, `canSubmit`
 - Prefix custom hooks with 'use': `useAuth`, `useForm`
 - Use complete words over abbreviations except for:
-    - err (error)
-    - req (request)
-    - res (response)
-    - props (properties)
-    - ref (reference)
+  - err (error)
+  - req (request)
+  - res (response)
+  - props (properties)
+  - ref (reference)
 
 ## Environment Setup
 
@@ -184,42 +184,42 @@ NEXTAUTH_URL=http://localhost:3000
 ```tsx
 // Example: User Profile Component
 interface UserProfileProps {
-	userId: string
-	onUpdate?: (user: User) => void
+  userId: string;
+  onUpdate?: (user: User) => void;
 }
 
 export function UserProfile({ userId, onUpdate }: UserProfileProps) {
-	const [user, setUser] = useState<User | null>(null)
-	const [isLoading, setIsLoading] = useState(true)
-	const [hasError, setHasError] = useState(false)
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-	useEffect(() => {
-		const fetchUser = async () => {
-			try {
-				setIsLoading(true)
-				const userData = await getUserById(userId)
-				setUser(userData)
-			} catch (error) {
-				setHasError(true)
-				console.error('Failed to fetch user:', error)
-			} finally {
-				setIsLoading(false)
-			}
-		}
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setIsLoading(true);
+        const userData = await getUserById(userId);
+        setUser(userData);
+      } catch (error) {
+        setHasError(true);
+        console.error("Failed to fetch user:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-		fetchUser()
-	}, [userId])
+    fetchUser();
+  }, [userId]);
 
-	if (isLoading) return <div>Loading...</div>
-	if (hasError) return <div>Error loading user</div>
-	if (!user) return <div>User not found</div>
+  if (isLoading) return <div>Loading...</div>;
+  if (hasError) return <div>Error loading user</div>;
+  if (!user) return <div>User not found</div>;
 
-	return (
-		<div className="user-profile">
-			<h2>{user.name}</h2>
-			<p>{user.email}</p>
-		</div>
-	)
+  return (
+    <div className="user-profile">
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
 }
 ```
 
@@ -227,9 +227,9 @@ Maintaining UI state in the URL lets users refresh, bookmark, or share their exa
 
 ```tsx
 //Custom Hook Example: Managing Modal Visibility with URL Query Params
-'use client'
+"use client";
 
-import { useQueryState, parseAsBoolean } from 'next/navigation'
+import { useQueryState, parseAsBoolean } from "next/navigation";
 
 /**
  * Toggle a dialog whose state is stored in the URL (?dialog-name=true).
@@ -238,21 +238,21 @@ import { useQueryState, parseAsBoolean } from 'next/navigation'
  * - `withOptions({ clearOnDefault: true })` removes the key when `false`, keeping the URL clean.
  */
 export const useToggleModal = () => {
-	const [isOpen, setIsOpen] = useQueryState(
-		'dialog-name',
-		parseAsBoolean.withDefault(false).withOptions({ clearOnDefault: true }),
-	)
+  const [isOpen, setIsOpen] = useQueryState(
+    "dialog-name",
+    parseAsBoolean.withDefault(false).withOptions({ clearOnDefault: true }),
+  );
 
-	const open = () => setIsOpen(true) // ➜ &dialog-name=true
-	const close = () => setIsOpen(false) // ➜ param removed
+  const open = () => setIsOpen(true); // ➜ &dialog-name=true
+  const close = () => setIsOpen(false); // ➜ param removed
 
-	return {
-		isOpen,
-		open,
-		close,
-		setIsOpen,
-	}
-}
+  return {
+    isOpen,
+    open,
+    close,
+    setIsOpen,
+  };
+};
 ```
 
 Responsive Modal / Drawer Component
@@ -260,51 +260,51 @@ Responsive Modal / Drawer Component
 A responsive wrapper that renders a Drawer on mobile and a regular Dialog on desktop. This keeps the UX consistent across breakpoints without duplicating markup.
 
 ```tsx
-'use client'
+"use client";
 
-import { useMedia } from 'react-use'
+import { useMedia } from "react-use";
 import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogTitle,
-} from '@/components/ui/dialog'
-import { Drawer, DrawerContent, DrawerTitle } from '@/components/ui/drawer'
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 
 type Props = {
-	children: React.ReactNode
-	isOpen: boolean
-	onOpenChange: (open: boolean) => void
-}
+  children: React.ReactNode;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+};
 
 export const ResponsiveModal = ({ children, isOpen, onOpenChange }: Props) => {
-	// `true` as the second arg sets the hook’s default on the server to `true`,
-	// preventing hydration mismatches when the viewport width is unknown.
-	const isDesktop = useMedia('(min-width: 1024px)', true)
+  // `true` as the second arg sets the hook’s default on the server to `true`,
+  // preventing hydration mismatches when the viewport width is unknown.
+  const isDesktop = useMedia("(min-width: 1024px)", true);
 
-	if (isDesktop) {
-		return (
-			<Dialog open={isOpen} onOpenChange={onOpenChange}>
-				<DialogTitle />
-				<DialogDescription />
-				<DialogContent className="hide-scrollbar z-[9999] max-h-[85vh] w-full overflow-y-auto border-none p-0 sm:max-w-lg">
-					{children}
-				</DialogContent>
-			</Dialog>
-		)
-	}
+  if (isDesktop) {
+    return (
+      <Dialog open={isOpen} onOpenChange={onOpenChange}>
+        <DialogTitle />
+        <DialogDescription />
+        <DialogContent className="hide-scrollbar z-[9999] max-h-[85vh] w-full overflow-y-auto border-none p-0 sm:max-w-lg">
+          {children}
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
-	return (
-		<Drawer open={isOpen} onOpenChange={onOpenChange}>
-			<DrawerTitle />
-			<DrawerContent>
-				<div className="hide-scrollbar z-[99999] max-h-[70vh] overflow-y-auto pb-24">
-					{children}
-				</div>
-			</DrawerContent>
-		</Drawer>
-	)
-}
+  return (
+    <Drawer open={isOpen} onOpenChange={onOpenChange}>
+      <DrawerTitle />
+      <DrawerContent>
+        <div className="hide-scrollbar z-[99999] max-h-[70vh] overflow-y-auto pb-24">
+          {children}
+        </div>
+      </DrawerContent>
+    </Drawer>
+  );
+};
 ```
 
 #### React Performance Optimization
@@ -316,39 +316,39 @@ export const ResponsiveModal = ({ children, isOpen, onOpenChange }: Props) => {
 - Implement proper key props in lists (avoid using index as key)
 
 ```tsx
-import { memo, useMemo, useCallback } from 'react'
+import { memo, useMemo, useCallback } from "react";
 
 interface UserListProps {
-	users: User[]
-	onUserSelect: (userId: string) => void
+  users: User[];
+  onUserSelect: (userId: string) => void;
 }
 
 export const UserList = memo(({ users, onUserSelect }: UserListProps) => {
-	const sortedUsers = useMemo(() => {
-		return users.sort((a, b) => a.name.localeCompare(b.name))
-	}, [users])
+  const sortedUsers = useMemo(() => {
+    return users.sort((a, b) => a.name.localeCompare(b.name));
+  }, [users]);
 
-	const handleUserClick = useCallback(
-		(userId: string) => {
-			onUserSelect(userId)
-		},
-		[onUserSelect],
-	)
+  const handleUserClick = useCallback(
+    (userId: string) => {
+      onUserSelect(userId);
+    },
+    [onUserSelect],
+  );
 
-	return (
-		<div className="user-list">
-			{sortedUsers.map((user) => (
-				<div
-					key={user.id}
-					onClick={() => handleUserClick(user.id)}
-					className="user-item"
-				>
-					{user.name}
-				</div>
-			))}
-		</div>
-	)
-})
+  return (
+    <div className="user-list">
+      {sortedUsers.map((user) => (
+        <div
+          key={user.id}
+          onClick={() => handleUserClick(user.id)}
+          className="user-item"
+        >
+          {user.name}
+        </div>
+      ))}
+    </div>
+  );
+});
 ```
 
 ### Next.js Best Practices
@@ -363,10 +363,10 @@ export const UserList = memo(({ users, onUserSelect }: UserListProps) => {
 #### Components and Features
 
 - Use Next.js built-in components:
-    - Image component for optimized images
-    - Link component for client-side navigation
-    - Script component for external scripts
-    - Head component for metadata
+  - Image component for optimized images
+  - Link component for client-side navigation
+  - Script component for external scripts
+  - Head component for metadata
 - Implement proper loading states
 - Use proper data fetching methods
 
@@ -375,30 +375,30 @@ export const UserList = memo(({ users, onUserSelect }: UserListProps) => {
 - Default to Server Components
 - Use URL query parameters for data fetching and server state management
 - Use 'use client' directive only when necessary:
-    - Event listeners
-    - Browser APIs
-    - State management
-    - Client-side-only libraries
+  - Event listeners
+  - Browser APIs
+  - State management
+  - Client-side-only libraries
 
 ```tsx
 // Example: Server Component with data fetching
 interface PostsPageProps {
-	searchParams: { page?: string; category?: string }
+  searchParams: { page?: string; category?: string };
 }
 
 export default async function PostsPage({ searchParams }: PostsPageProps) {
-	const page = Number(searchParams.page) || 1
-	const category = searchParams.category || 'all'
+  const page = Number(searchParams.page) || 1;
+  const category = searchParams.category || "all";
 
-	const posts = await fetchPosts({ page, category })
+  const posts = await fetchPosts({ page, category });
 
-	return (
-		<div className="posts-page">
-			<h1>Posts</h1>
-			<PostsList posts={posts} />
-			<Pagination currentPage={page} />
-		</div>
-	)
+  return (
+    <div className="posts-page">
+      <h1>Posts</h1>
+      <PostsList posts={posts} />
+      <Pagination currentPage={page} />
+    </div>
+  );
 }
 ```
 
@@ -415,32 +415,32 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
 ```tsx
 // Example: TypeScript interfaces and types
 interface User {
-	id: string
-	name: string
-	email: string
-	role: 'admin' | 'user' | 'moderator'
-	createdAt: Date
-	updatedAt: Date
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user" | "moderator";
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface ApiResponse<T> {
-	data: T
-	message: string
-	success: boolean
+  data: T;
+  message: string;
+  success: boolean;
 }
 
-type UserCreateInput = Omit<User, 'id' | 'createdAt' | 'updatedAt'>
-type UserUpdateInput = Partial<Pick<User, 'name' | 'email' | 'role'>>
+type UserCreateInput = Omit<User, "id" | "createdAt" | "updatedAt">;
+type UserUpdateInput = Partial<Pick<User, "name" | "email" | "role">>;
 
 // Type guard example
 function isUser(obj: unknown): obj is User {
-	return (
-		typeof obj === 'object' &&
-		obj !== null &&
-		'id' in obj &&
-		'name' in obj &&
-		'email' in obj
-	)
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "id" in obj &&
+    "name" in obj &&
+    "email" in obj
+  );
 }
 ```
 
@@ -464,56 +464,56 @@ function isUser(obj: unknown): obj is User {
 
 ```tsx
 // Example: Redux slice with TypeScript
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
-	users: User[]
-	currentUser: User | null
-	isLoading: boolean
-	error: string | null
+  users: User[];
+  currentUser: User | null;
+  isLoading: boolean;
+  error: string | null;
 }
 
 const initialState: UserState = {
-	users: [],
-	currentUser: null,
-	isLoading: false,
-	error: null,
-}
+  users: [],
+  currentUser: null,
+  isLoading: false,
+  error: null,
+};
 
 const userSlice = createSlice({
-	name: 'user',
-	initialState,
-	reducers: {
-		setLoading: (state, action: PayloadAction<boolean>) => {
-			state.isLoading = action.payload
-		},
-		setUsers: (state, action: PayloadAction<User[]>) => {
-			state.users = action.payload
-			state.isLoading = false
-			state.error = null
-		},
-		setCurrentUser: (state, action: PayloadAction<User>) => {
-			state.currentUser = action.payload
-		},
-		setError: (state, action: PayloadAction<string>) => {
-			state.error = action.payload
-			state.isLoading = false
-		},
-		clearError: (state) => {
-			state.error = null
-		},
-	},
-})
+  name: "user",
+  initialState,
+  reducers: {
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
+    setUsers: (state, action: PayloadAction<User[]>) => {
+      state.users = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+    setCurrentUser: (state, action: PayloadAction<User>) => {
+      state.currentUser = action.payload;
+    },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
+});
 
 export const { setLoading, setUsers, setCurrentUser, setError, clearError } =
-	userSlice.actions
-export default userSlice.reducer
+  userSlice.actions;
+export default userSlice.reducer;
 
 // Selectors
-export const selectUsers = (state: RootState) => state.user.users
-export const selectCurrentUser = (state: RootState) => state.user.currentUser
-export const selectUserLoading = (state: RootState) => state.user.isLoading
-export const selectUserError = (state: RootState) => state.user.error
+export const selectUsers = (state: RootState) => state.user.users;
+export const selectCurrentUser = (state: RootState) => state.user.currentUser;
+export const selectUserLoading = (state: RootState) => state.user.isLoading;
+export const selectUserError = (state: RootState) => state.user.error;
 ```
 
 ## UI and Styling
@@ -536,27 +536,27 @@ export const selectUserError = (state: RootState) => state.user.error
 ```tsx
 // Example: Styled component with Tailwind and dark mode
 interface CardProps {
-	title: string
-	children: React.ReactNode
-	variant?: 'default' | 'outlined' | 'filled'
+  title: string;
+  children: React.ReactNode;
+  variant?: "default" | "outlined" | "filled";
 }
 
-export function Card({ title, children, variant = 'default' }: CardProps) {
-	const baseClasses = 'rounded-lg p-6 transition-colors duration-200'
-	const variantClasses = {
-		default: 'bg-white dark:bg-gray-800 shadow-md',
-		outlined: 'border border-gray-200 dark:border-gray-700',
-		filled: 'bg-gray-50 dark:bg-gray-900',
-	}
+export function Card({ title, children, variant = "default" }: CardProps) {
+  const baseClasses = "rounded-lg p-6 transition-colors duration-200";
+  const variantClasses = {
+    default: "bg-white dark:bg-gray-800 shadow-md",
+    outlined: "border border-gray-200 dark:border-gray-700",
+    filled: "bg-gray-50 dark:bg-gray-900",
+  };
 
-	return (
-		<div className={`${baseClasses} ${variantClasses[variant]}`}>
-			<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-				{title}
-			</h3>
-			<div className="text-gray-700 dark:text-gray-300">{children}</div>
-		</div>
-	)
+  return (
+    <div className={`${baseClasses} ${variantClasses[variant]}`}>
+      <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
+        {title}
+      </h3>
+      <div className="text-gray-700 dark:text-gray-300">{children}</div>
+    </div>
+  );
 }
 ```
 
@@ -578,36 +578,36 @@ export function Card({ title, children, variant = 'default' }: CardProps) {
 
 ```tsx
 // Example: Component testing with React Testing Library
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { Provider } from 'react-redux'
-import { store } from '../lib/store'
-import { UserProfile } from '../components/UserProfile'
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { store } from "../lib/store";
+import { UserProfile } from "../components/UserProfile";
 
 const renderWithProvider = (component: React.ReactElement) => {
-	return render(<Provider store={store}>{component}</Provider>)
-}
+  return render(<Provider store={store}>{component}</Provider>);
+};
 
-describe('UserProfile Component', () => {
-	test('displays user information correctly', async () => {
-		const mockUser = {
-			id: '1',
-			name: 'John Doe',
-			email: 'john@example.com',
-		}
+describe("UserProfile Component", () => {
+  test("displays user information correctly", async () => {
+    const mockUser = {
+      id: "1",
+      name: "John Doe",
+      email: "john@example.com",
+    };
 
-		renderWithProvider(<UserProfile userId="1" />)
+    renderWithProvider(<UserProfile userId="1" />);
 
-		await waitFor(() => {
-			expect(screen.getByText('John Doe')).toBeInTheDocument()
-			expect(screen.getByText('john@example.com')).toBeInTheDocument()
-		})
-	})
+    await waitFor(() => {
+      expect(screen.getByText("John Doe")).toBeInTheDocument();
+      expect(screen.getByText("john@example.com")).toBeInTheDocument();
+    });
+  });
 
-	test('handles loading state', () => {
-		renderWithProvider(<UserProfile userId="1" />)
-		expect(screen.getByText('Loading...')).toBeInTheDocument()
-	})
-})
+  test("handles loading state", () => {
+    renderWithProvider(<UserProfile userId="1" />);
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
+  });
+});
 ```
 
 ## Error Handling and Validation
@@ -620,74 +620,70 @@ describe('UserProfile Component', () => {
 
 ```tsx
 // Example: Form validation with Zod and React Hook Form
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 const userSchema = z.object({
-	name: z.string().min(2, 'Name must be at least 2 characters'),
-	email: z.string().email('Invalid email address'),
-	age: z.number().min(18, 'Must be at least 18 years old'),
-})
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  age: z.number().min(18, "Must be at least 18 years old"),
+});
 
-type UserFormData = z.infer<typeof userSchema>
+type UserFormData = z.infer<typeof userSchema>;
 
 export function UserForm() {
-	const {
-		register,
-		handleSubmit,
-		formState: { errors, isSubmitting },
-	} = useForm<UserFormData>({
-		resolver: zodResolver(userSchema),
-	})
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<UserFormData>({
+    resolver: zodResolver(userSchema),
+  });
 
-	const onSubmit = async (data: UserFormData) => {
-		try {
-			await createUser(data)
-			// Handle success
-		} catch (error) {
-			// Handle error
-		}
-	}
+  const onSubmit = async (data: UserFormData) => {
+    try {
+      await createUser(data);
+      // Handle success
+    } catch (error) {
+      // Handle error
+    }
+  };
 
-	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-			<div>
-				<input
-					{...register('name')}
-					placeholder="Name"
-					className="w-full p-2 border rounded"
-				/>
-				{errors.name && (
-					<p className="text-red-500 text-sm">
-						{errors.name.message}
-					</p>
-				)}
-			</div>
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <div>
+        <input
+          {...register("name")}
+          placeholder="Name"
+          className="w-full rounded border p-2"
+        />
+        {errors.name && (
+          <p className="text-sm text-red-500">{errors.name.message}</p>
+        )}
+      </div>
 
-			<div>
-				<input
-					{...register('email')}
-					type="email"
-					placeholder="Email"
-					className="w-full p-2 border rounded"
-				/>
-				{errors.email && (
-					<p className="text-red-500 text-sm">
-						{errors.email.message}
-					</p>
-				)}
-			</div>
+      <div>
+        <input
+          {...register("email")}
+          type="email"
+          placeholder="Email"
+          className="w-full rounded border p-2"
+        />
+        {errors.email && (
+          <p className="text-sm text-red-500">{errors.email.message}</p>
+        )}
+      </div>
 
-			<button
-				type="submit"
-				disabled={isSubmitting}
-				className="w-full p-2 bg-blue-500 text-white rounded disabled:opacity-50"
-			>
-				{isSubmitting ? 'Submitting...' : 'Submit'}
-			</button>
-		</form>
-	)
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full rounded bg-blue-500 p-2 text-white disabled:opacity-50"
+      >
+        {isSubmitting ? "Submitting..." : "Submit"}
+      </button>
+    </form>
+  );
 }
 ```
 
@@ -699,53 +695,53 @@ export function UserForm() {
 
 ```tsx
 // Example: Error Boundary component
-import { Component, ErrorInfo, ReactNode } from 'react'
+import { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
-	children: ReactNode
+  children: ReactNode;
 }
 
 interface State {
-	hasError: boolean
-	error?: Error
+  hasError: boolean;
+  error?: Error;
 }
 
 export class ErrorBoundary extends Component<Props, State> {
-	public state: State = {
-		hasError: false,
-	}
+  public state: State = {
+    hasError: false,
+  };
 
-	public static getDerivedStateFromError(error: Error): State {
-		return { hasError: true, error }
-	}
+  public static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, error };
+  }
 
-	public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-		console.error('Uncaught error:', error, errorInfo)
-		// Log to external service like Sentry
-	}
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("Uncaught error:", error, errorInfo);
+    // Log to external service like Sentry
+  }
 
-	public render() {
-		if (this.state.hasError) {
-			return (
-				<div className="error-boundary p-8 text-center">
-					<h2 className="text-xl font-bold text-red-600 mb-4">
-						Something went wrong
-					</h2>
-					<p className="text-gray-600 mb-4">
-						We're sorry, but something unexpected happened.
-					</p>
-					<button
-						onClick={() => this.setState({ hasError: false })}
-						className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-					>
-						Try again
-					</button>
-				</div>
-			)
-		}
+  public render() {
+    if (this.state.hasError) {
+      return (
+        <div className="error-boundary p-8 text-center">
+          <h2 className="mb-4 text-xl font-bold text-red-600">
+            Something went wrong
+          </h2>
+          <p className="mb-4 text-gray-600">
+            We're sorry, but something unexpected happened.
+          </p>
+          <button
+            onClick={() => this.setState({ hasError: false })}
+            className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+          >
+            Try again
+          </button>
+        </div>
+      );
+    }
 
-		return this.props.children
-	}
+    return this.props.children;
+  }
 }
 ```
 
@@ -760,23 +756,23 @@ export class ErrorBoundary extends Component<Props, State> {
 
 ```tsx
 // Example: Code splitting and lazy loading
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense } from "react";
 
-const LazyDashboard = lazy(() => import('./Dashboard'))
-const LazySettings = lazy(() => import('./Settings'))
+const LazyDashboard = lazy(() => import("./Dashboard"));
+const LazySettings = lazy(() => import("./Settings"));
 
 export function App() {
-	return (
-		<div className="app">
-			<Suspense fallback={<div>Loading Dashboard...</div>}>
-				<LazyDashboard />
-			</Suspense>
+  return (
+    <div className="app">
+      <Suspense fallback={<div>Loading Dashboard...</div>}>
+        <LazyDashboard />
+      </Suspense>
 
-			<Suspense fallback={<div>Loading Settings...</div>}>
-				<LazySettings />
-			</Suspense>
-		</div>
-	)
+      <Suspense fallback={<div>Loading Settings...</div>}>
+        <LazySettings />
+      </Suspense>
+    </div>
+  );
 }
 ```
 
@@ -798,22 +794,22 @@ export function App() {
 
 ```tsx
 // Example: Input sanitization with DOMPurify
-import DOMPurify from 'dompurify'
+import DOMPurify from "dompurify";
 
 interface SafeHtmlProps {
-	html: string
-	className?: string
+  html: string;
+  className?: string;
 }
 
 export function SafeHtml({ html, className }: SafeHtmlProps) {
-	const sanitizedHtml = DOMPurify.sanitize(html)
+  const sanitizedHtml = DOMPurify.sanitize(html);
 
-	return (
-		<div
-			className={className}
-			dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
-		/>
-	)
+  return (
+    <div
+      className={className}
+      dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
+    />
+  );
 }
 ```
 
@@ -840,41 +836,37 @@ export function SafeHtml({ html, className }: SafeHtmlProps) {
 ```tsx
 // Example: Accessible form component
 export function AccessibleForm() {
-	const [errors, setErrors] = useState<Record<string, string>>({})
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-	return (
-		<form role="form" aria-labelledby="form-title">
-			<h2 id="form-title">User Registration</h2>
+  return (
+    <form role="form" aria-labelledby="form-title">
+      <h2 id="form-title">User Registration</h2>
 
-			<div className="form-group">
-				<label htmlFor="email" className="required">
-					Email Address
-				</label>
-				<input
-					id="email"
-					type="email"
-					required
-					aria-describedby={errors.email ? 'email-error' : undefined}
-					aria-invalid={!!errors.email}
-					className="form-input"
-				/>
-				{errors.email && (
-					<div
-						id="email-error"
-						role="alert"
-						className="error-message"
-					>
-						{errors.email}
-					</div>
-				)}
-			</div>
+      <div className="form-group">
+        <label htmlFor="email" className="required">
+          Email Address
+        </label>
+        <input
+          id="email"
+          type="email"
+          required
+          aria-describedby={errors.email ? "email-error" : undefined}
+          aria-invalid={!!errors.email}
+          className="form-input"
+        />
+        {errors.email && (
+          <div id="email-error" role="alert" className="error-message">
+            {errors.email}
+          </div>
+        )}
+      </div>
 
-			<button type="submit" className="submit-button">
-				Register
-				<span className="sr-only">(opens in new window)</span>
-			</button>
-		</form>
-	)
+      <button type="submit" className="submit-button">
+        Register
+        <span className="sr-only">(opens in new window)</span>
+      </button>
+    </form>
+  );
 }
 ```
 
@@ -892,34 +884,34 @@ export function AccessibleForm() {
 // Example: i18n configuration
 // next-i18next.config.js
 module.exports = {
-	i18n: {
-		defaultLocale: 'en',
-		locales: ['en', 'es', 'fr', 'de'],
-	},
-	reloadOnPrerender: process.env.NODE_ENV === 'development',
-}
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es", "fr", "de"],
+  },
+  reloadOnPrerender: process.env.NODE_ENV === "development",
+};
 
 // Example: Using translations in components
-import { useTranslation } from 'next-i18next'
-import { GetStaticProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from "next-i18next";
+import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export function WelcomePage() {
-	const { t } = useTranslation('common')
+  const { t } = useTranslation("common");
 
-	return (
-		<div>
-			<h1>{t('welcome.title')}</h1>
-			<p>{t('welcome.description')}</p>
-		</div>
-	)
+  return (
+    <div>
+      <h1>{t("welcome.title")}</h1>
+      <p>{t("welcome.description")}</p>
+    </div>
+  );
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-	props: {
-		...(await serverSideTranslations(locale ?? 'en', ['common'])),
-	},
-})
+  props: {
+    ...(await serverSideTranslations(locale ?? "en", ["common"])),
+  },
+});
 ```
 
 ## Deployment Guide
@@ -956,40 +948,40 @@ NEXTAUTH_URL=https://yourdomain.com
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	experimental: {
-		appDir: true,
-	},
-	images: {
-		domains: ['example.com', 'cdn.example.com'],
-		formats: ['image/webp', 'image/avif'],
-	},
-	env: {
-		CUSTOM_KEY: process.env.CUSTOM_KEY,
-	},
-	async headers() {
-		return [
-			{
-				source: '/(.*)',
-				headers: [
-					{
-						key: 'X-Content-Type-Options',
-						value: 'nosniff',
-					},
-					{
-						key: 'X-Frame-Options',
-						value: 'DENY',
-					},
-					{
-						key: 'X-XSS-Protection',
-						value: '1; mode=block',
-					},
-				],
-			},
-		]
-	},
-}
+  experimental: {
+    appDir: true,
+  },
+  images: {
+    domains: ["example.com", "cdn.example.com"],
+    formats: ["image/webp", "image/avif"],
+  },
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
+          },
+        ],
+      },
+    ];
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Monitoring and Logging
@@ -1009,29 +1001,29 @@ module.exports = nextConfig
 
 ```tsx
 // Example: Error tracking setup
-import * as Sentry from '@sentry/nextjs'
+import * as Sentry from "@sentry/nextjs";
 
 Sentry.init({
-	dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-	environment: process.env.NODE_ENV,
-	tracesSampleRate: 1.0,
-})
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  environment: process.env.NODE_ENV,
+  tracesSampleRate: 1.0,
+});
 
 // Custom error logging utility
 export const logger = {
-	error: (message: string, error?: Error, context?: Record<string, any>) => {
-		console.error(message, error, context)
-		Sentry.captureException(error || new Error(message), {
-			extra: context,
-		})
-	},
-	warn: (message: string, context?: Record<string, any>) => {
-		console.warn(message, context)
-	},
-	info: (message: string, context?: Record<string, any>) => {
-		console.info(message, context)
-	},
-}
+  error: (message: string, error?: Error, context?: Record<string, any>) => {
+    console.error(message, error, context);
+    Sentry.captureException(error || new Error(message), {
+      extra: context,
+    });
+  },
+  warn: (message: string, context?: Record<string, any>) => {
+    console.warn(message, context);
+  },
+  info: (message: string, context?: Record<string, any>) => {
+    console.info(message, context);
+  },
+};
 ```
 
 ## Common Issues

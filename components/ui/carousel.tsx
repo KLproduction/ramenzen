@@ -1,11 +1,18 @@
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 import { useState, useRef, useId, useEffect } from "react";
 
+// Match Prisma BlogPost schema
 interface SlideData {
+  id: string | number;
   title: string;
   content: string;
-  src: string;
+  image: string;
+  slug: string;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
+  category?: string;
 }
 
 interface SlideProps {
@@ -17,7 +24,6 @@ interface SlideProps {
 
 const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   const slideRef = useRef<HTMLLIElement>(null);
-
   const xRef = useRef(0);
   const yRef = useRef(0);
   const frameRef = useRef<number>();
@@ -25,18 +31,13 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   useEffect(() => {
     const animate = () => {
       if (!slideRef.current) return;
-
       const x = xRef.current;
       const y = yRef.current;
-
       slideRef.current.style.setProperty("--x", `${x}px`);
       slideRef.current.style.setProperty("--y", `${y}px`);
-
       frameRef.current = requestAnimationFrame(animate);
     };
-
     frameRef.current = requestAnimationFrame(animate);
-
     return () => {
       if (frameRef.current) {
         cancelAnimationFrame(frameRef.current);
@@ -47,7 +48,6 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   const handleMouseMove = (event: React.MouseEvent) => {
     const el = slideRef.current;
     if (!el) return;
-
     const r = el.getBoundingClientRect();
     xRef.current = event.clientX - (r.left + Math.floor(r.width / 2));
     yRef.current = event.clientY - (r.top + Math.floor(r.height / 2));
@@ -62,9 +62,11 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     event.currentTarget.style.opacity = "1";
   };
 
-  const { src, content, title } = slide;
+  // Use database schema fields
+  const { id, image, content, title, category, createdAt } = slide;
 
-  const isMobile = window.innerWidth < 768;
+  const isMobile =
+    typeof window !== "undefined" ? window.innerWidth < 768 : false;
   const maxLength = isMobile ? 80 : 150;
   const previewContent =
     content.length > maxLength ? content.slice(0, maxLength) + "..." : content;
@@ -101,7 +103,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
               opacity: current === index ? 1 : 0.5,
             }}
             alt={title}
-            src={src}
+            src={image}
             onLoad={imageLoaded}
             loading="lazy"
             decoding="async"
@@ -124,6 +126,18 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
               {previewContent}
             </p>
           </div>
+          {category && (
+            <div className="mt-4 text-xs text-yellow-200">
+              Category: {category}
+            </div>
+          )}
+          {createdAt && (
+            <div className="mt-1 text-xs text-yellow-100">
+              {typeof createdAt === "string"
+                ? new Date(createdAt).toLocaleDateString()
+                : createdAt.toLocaleDateString()}
+            </div>
+          )}
         </article>
       </li>
     </div>
@@ -159,6 +173,7 @@ interface CarouselProps {
 }
 
 export function Carousel({ slides }: CarouselProps) {
+  const route = useRouter();
   const [current, setCurrent] = useState(0);
 
   const handlePreviousClick = () => {
@@ -174,6 +189,13 @@ export function Carousel({ slides }: CarouselProps) {
   const handleSlideClick = (index: number) => {
     if (current !== index) {
       setCurrent(index);
+    } else {
+      // Navigate to blog post using slug
+      const slug = slides[index].slug;
+      console.log("Navigating to blog post with slug:", slug);
+      if (slug) {
+        route.push(`/blog/${slug}`);
+      }
     }
   };
 
@@ -192,7 +214,7 @@ export function Carousel({ slides }: CarouselProps) {
       >
         {slides.map((slide, index) => (
           <Slide
-            key={index}
+            key={slide.id}
             slide={slide}
             index={index}
             current={current}

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, TagEnum } from "@prisma/client";
 import { MenuItem } from "@/data/type";
 
 import { blogDemo } from "@/data/blogDemo";
@@ -82,32 +82,66 @@ async function main() {
     });
   }
 
-  /** 3. Upsert blog posts */
-  await Promise.all(
-    blogDemo.map((post) =>
-      prisma.blogPost.upsert({
-        where: { slug: post.slug },
-        update: {
-          title: post.title,
-          content: post.content,
-          image: post.image,
-          createdAt: new Date(post.createdAt),
-          author: post.author,
-          tags: post.tags,
-        },
-        create: {
-          id: post.id,
-          slug: post.slug,
-          title: post.title,
-          content: post.content,
-          image: post.image,
-          createdAt: new Date(post.createdAt),
-          author: post.author,
-          tags: post.tags,
-        },
-      }),
-    ),
-  );
+  /** 3. Upsert blog posts and tags (many-to-many) */
+  for (const post of blogDemo) {
+    // Upsert the blog post itself
+    const blog = await prisma.blogPost.upsert({
+      where: { slug: post.slug },
+      update: {
+        title: post.title,
+        content: post.content,
+        image: post.image,
+        createdAt: new Date(post.createdAt),
+        author: post.author,
+      },
+      create: {
+        id: post.id,
+        slug: post.slug,
+        title: post.title,
+        content: post.content,
+        image: post.image,
+        createdAt: new Date(post.createdAt),
+        author: post.author,
+      },
+    });
+
+    await prisma.blogPostTag.deleteMany({ where: { blogPostId: blog.id } });
+
+    if (Array.isArray(post.tags)) {
+      const validTags = [
+        "RAMEN",
+        "SUSHI",
+        "UDON",
+        "SOBA",
+        "DONBURI",
+        "TEMPURA",
+        "KATSU",
+        "CURRY",
+        "YAKITORI",
+        "OKONOMIYAKI",
+        "TAKOYAKI",
+        "MOCHI",
+        "MATCHA",
+        "BENTO",
+        "GYOZA",
+        "MISO",
+        "ONSEN_TAMAGO",
+        "SHABU_SHABU",
+        "SUKIYAKI",
+        "TSUKEMONO",
+      ];
+      for (const tag of post.tags) {
+        if (validTags.includes(tag)) {
+          await prisma.blogPostTag.create({
+            data: {
+              blogPostId: blog.id,
+              tag: tag as TagEnum,
+            },
+          });
+        }
+      }
+    }
+  }
 }
 
 main()
