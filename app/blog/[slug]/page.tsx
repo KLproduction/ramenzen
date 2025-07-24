@@ -9,6 +9,7 @@ import {
   getRecentBlogPosts,
   getAllBlogCategories,
 } from "@/actions/blog";
+import BlogHeader from "./components/BlogHeader";
 
 export default async function BlogPostPage({
   params,
@@ -30,6 +31,7 @@ export default async function BlogPostPage({
 
   return (
     <div className="relative min-h-screen w-full">
+      <BlogHeader post={post} />
       <div className="mx-auto flex w-full flex-col gap-8 py-12 md:flex-row md:gap-12">
         <aside className="sticky top-24 gap-6 self-start md:w-1/4">
           <RecentPosts posts={recentPosts} />

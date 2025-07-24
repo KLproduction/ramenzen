@@ -189,15 +189,20 @@ export function Carousel({ slides }: CarouselProps) {
   const handleSlideClick = (index: number) => {
     if (current !== index) {
       setCurrent(index);
-    } else {
-      // Navigate to blog post using slug
-      const slug = slides[index].slug;
-      console.log("Navigating to blog post with slug:", slug);
-      if (slug) {
-        route.push(`/blog/${slug}`);
-      }
     }
   };
+  // const handleSlideClick = (index: number) => {
+  //   if (current !== index) {
+  //     setCurrent(index);
+  //   } else {
+  //     // Navigate to blog post using slug
+  //     const slug = slides[index].slug;
+  //     console.log("Navigating to blog post with slug:", slug);
+  //     if (slug) {
+  //       route.push(`/blog/${slug}`);
+  //     }
+  //   }
+  // };
 
   const id = useId();
 
