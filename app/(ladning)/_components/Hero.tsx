@@ -6,8 +6,6 @@ import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import React, { useEffect, useRef } from "react";
-import dashesSvg from "@/public/dashes.svg";
-import dashesPng from "@/public/dashes.png";
 
 const Hero = () => {
   const { open } = useBookingModal();
@@ -45,7 +43,7 @@ const Hero = () => {
             className={cn("absolute inset-0 z-10")}
           >
             <Image
-              src={dashesSvg}
+              src="/dashes.svg"
               alt="background1"
               fill
               priority
@@ -60,11 +58,10 @@ const Hero = () => {
             className="absolute inset-0 z-10"
           >
             <Image
-              src={dashesPng}
+              src="/dashes.png"
               alt="background2"
               fill
               priority
-              placeholder="blur"
               sizes="100vw"
               className="object-cover brightness-75"
             />
