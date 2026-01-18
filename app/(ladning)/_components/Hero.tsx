@@ -4,7 +4,10 @@ import { Button } from "@/components/ui/button";
 import { useBookingModal } from "@/hooks/modal";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import React, { useEffect, useRef } from "react";
+import dashesSvg from "@/public/dashes.svg";
+import dashesPng from "@/public/dashes.png";
 
 const Hero = () => {
   const { open } = useBookingModal();
@@ -36,45 +39,54 @@ const Hero = () => {
     <section className={cn("h-[300vh] w-full")} ref={targetRef}>
       <motion.div className="sticky top-0 flex h-screen w-full items-start justify-center overflow-hidden bg-zinc-800">
         <div className="relative h-full w-full">
-          <motion.img
-            src="dashes.svg"
-            alt="background1"
-            style={{
-              opacity: noColorOpacity,
-            }}
-            className={cn(
-              "absolute inset-0 z-10 h-full w-full object-cover brightness-75",
-            )}
-            loading="eager"
-            decoding="sync"
-          />
-          <motion.img
-            src="dashes.PNG"
-            alt="background2"
-            style={{
-              opacity: colorOpacity,
-            }}
-            className="absolute inset-0 z-10 h-full w-full object-cover brightness-75"
-          />
-        </div>
-        <div className="pointer-events-none absolute left-0 top-12 z-20 flex h-[100vh] w-full flex-col items-center justify-center gap-5 md:top-32">
-          <motion.div>
-            <h4 className="text-md lg:text-md text-center font-bold text-zinc-50 drop-shadow-lg md:text-4xl">
-              True Taste of Japan in Bristol
-            </h4>
-          </motion.div>
-        </div>
-        <div className="pointer-events-none absolute left-0 top-0 z-20 flex h-[100vh] w-full flex-col items-center justify-center gap-5">
+          {/* Layer 1: SVG (usually loads fast, blur not necessary) */}
           <motion.div
-            style={{
-              opacity: textOpacity,
-              scale: scale,
-            }}
+            style={{ opacity: noColorOpacity }}
+            className={cn("absolute inset-0 z-10")}
           >
-            <h1 className="caption text-md text-center text-yellow-400 md:text-4xl lg:text-6xl">
-              RAMENZEN
-            </h1>
+            <Image
+              src={dashesSvg}
+              alt="background1"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover brightness-75"
+            />
           </motion.div>
+
+          {/* Layer 2: PNG with blur placeholder */}
+          <motion.div
+            style={{ opacity: colorOpacity }}
+            className="absolute inset-0 z-10"
+          >
+            <Image
+              src={dashesPng}
+              alt="background2"
+              fill
+              priority
+              placeholder="blur"
+              sizes="100vw"
+              className="object-cover brightness-75"
+            />
+          </motion.div>
+
+          {/* Subtitle */}
+          <div className="pointer-events-none absolute left-0 top-12 z-20 flex h-[100vh] w-full flex-col items-center justify-center gap-5 md:top-32">
+            <motion.div>
+              <h4 className="text-md lg:text-md text-center font-bold text-zinc-50 drop-shadow-lg md:text-4xl">
+                True Taste of Japan in Bristol
+              </h4>
+            </motion.div>
+          </div>
+
+          {/* Title */}
+          <div className="pointer-events-none absolute left-0 top-0 z-20 flex h-[100vh] w-full flex-col items-center justify-center gap-5">
+            <motion.div style={{ opacity: textOpacity, scale }}>
+              <h1 className="caption text-md text-center text-yellow-400 md:text-4xl lg:text-6xl">
+                RAMENZEN
+              </h1>
+            </motion.div>
+          </div>
         </div>
 
         <motion.div
