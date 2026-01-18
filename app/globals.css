@@ -9,14 +9,6 @@
   font-style: normal;
 }
 @font-face {
-  font-family: "Kamikaze3DGradient";
-  src: url("/kamikaze/Kamikaze3DGradient.woff") format("woff");
-
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: "Kamikaze";
   src: url("/Kamikaze.ttf") format("truetype");
   font-weight: normal;
@@ -30,7 +22,7 @@
 }
 
 .caption {
-  font-family: "Kamikaze3DGradient", ui-sans-serif, system-ui;
+  font-family: var(--font-kamikaze-gradient), ui-sans-serif, system-ui;
 }
 .caption2 {
   font-family: "RiiT", sans-serif;

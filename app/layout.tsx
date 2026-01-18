@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
@@ -15,10 +16,15 @@ import Navbar from "@/components/Nabar/Navbar";
 import MobileNavbar from "@/components/Nabar/MobileNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
+const kamikazeGradient = localFont({
+  src: "../public/kamikaze/Kamikaze3DGradient.woff",
+  variable: "--font-kamikaze-gradient",
+  weight: "400",
+});
 
 export const metadata: Metadata = {
-  title: "Ramenzen",
-  description: "Ramen Zen Bristol",
+  title: "RamenZen",
+  description: "Bristol Japanese Ramen Restaurant",
 };
 
 export default async function RootLayout({
@@ -32,7 +38,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={`${inter.className} ${kamikazeGradient.variable}`}>
           <ReactQueryProvider>
             <ReduxProvider>
               <NuqsAdapter>
