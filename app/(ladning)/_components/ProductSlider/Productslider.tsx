@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 const ProductSlider = () => {
   const [active, setActive] = useState(1);
   const listRef = useRef<HTMLDivElement>(null);
-  const itemsRef = useRef<NodeListOf<HTMLDivElement>>();
+  const itemsRef = useRef<NodeListOf<HTMLDivElement> | null>(null);
   const circleRef = useRef<HTMLDivElement>(null);
   const [widthItem, setWidthItem] = useState(0);
   const route = useRouter();

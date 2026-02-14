@@ -14,10 +14,12 @@ import BlogHeader from "./components/BlogHeader";
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
+
   // Fetch post, recent posts, and categories from the database
-  const post = await getBlogPostBySlug(params.slug);
+  const post = await getBlogPostBySlug(slug);
   const recentPosts = await getRecentBlogPosts();
   const categories = await getAllBlogCategories();
 

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useBookingModal } from "@/hooks/modal";
 import { cn } from "@/lib/utils";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 
@@ -24,7 +24,16 @@ const Hero = () => {
     [0, 0.5, 0.7, 0.9],
     ["200px", "200px", "0%", "0%"],
   );
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [3, 3, 5, 50]);
+  const rawScale = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.6, 1],
+    [3, 5, 10, 25],
+  );
+  const scale = useSpring(rawScale, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.35,
+  });
 
   const bgColorOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [0, 0, 1]);
   const scrollIndicatorOpacity = useTransform(
@@ -78,7 +87,10 @@ const Hero = () => {
 
           {/* Title */}
           <div className="pointer-events-none absolute left-0 top-0 z-20 flex h-[100vh] w-full flex-col items-center justify-center gap-5">
-            <motion.div style={{ opacity: textOpacity, scale }}>
+            <motion.div
+              className="transform-gpu will-change-transform"
+              style={{ opacity: textOpacity, scale }}
+            >
               <h1 className="caption text-md text-center text-yellow-400 md:text-4xl lg:text-6xl">
                 RAMENZEN
               </h1>

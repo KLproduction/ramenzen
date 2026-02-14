@@ -1,12 +1,12 @@
 //this is our redux store
 "use client";
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const rootReducer = combineReducers({});
+const rootReducer = (state = {}) => state;
 const persisConfig = {
   key: "root",
   storage,

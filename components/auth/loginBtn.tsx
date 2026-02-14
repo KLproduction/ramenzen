@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { LoginForm } from "./LoginForm";
-import { useRef } from "react";
 import { Button } from "../ui/button";
 
 interface LoginButtonProps {
@@ -17,7 +16,6 @@ export const LoginButtonProps = ({
   mode = "redirect",
   asChild,
 }: LoginButtonProps) => {
-  const ref = useRef();
   const route = useRouter();
   const onClick = () => {
     route.push("/auth/login");

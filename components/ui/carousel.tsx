@@ -1,6 +1,5 @@
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
-import { useRouter } from "next/navigation";
 import { useState, useRef, useId, useEffect } from "react";
 
 // Match Prisma BlogPost schema
@@ -26,7 +25,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   const slideRef = useRef<HTMLLIElement>(null);
   const xRef = useRef(0);
   const yRef = useRef(0);
-  const frameRef = useRef<number>();
+  const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
     const animate = () => {
@@ -173,7 +172,6 @@ interface CarouselProps {
 }
 
 export function Carousel({ slides }: CarouselProps) {
-  const route = useRouter();
   const [current, setCurrent] = useState(0);
 
   const handlePreviousClick = () => {
