@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
+import { ReactLenis } from "lenis/react";
 import Hero from "./_components/Hero";
 import ProductSlider from "./_components/ProductSlider/Productslider";
 import SecCaption from "./_components/(about-us)/SecCaption";
@@ -18,38 +17,27 @@ import LandingBlog from "./_components/ladning-blog/LandingBlog";
 import MenuSection from "@/src/components/menu/MenuSection";
 
 export default function LandingPage() {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy(); // Clean up on unmount
-    };
-  }, []);
+  const lenisOptions = {
+    duration: 1.2,
+    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  };
 
   return (
-    <div className="h-full w-full bg-white">
-      <Hero />
-      <ProductSlider />
-      <MenuSection />
-      <RollingBar />
-      <div className="relative w-full">
-        <SecCaption />
-        <SecCaptionMobile />
-        <LandingBlog />
+    <ReactLenis root options={lenisOptions}>
+      <div className="h-full w-full bg-white">
+        <Hero />
+        <ProductSlider />
+        <MenuSection />
+        <RollingBar />
+        <div className="relative w-full">
+          <SecCaption />
+          <SecCaptionMobile />
+          <LandingBlog />
+        </div>
+        <Booking />
+        <ContactSection />
+        <MyFooter />
       </div>
-      <Booking />
-      <ContactSection />
-      <MyFooter />
-    </div>
+    </ReactLenis>
   );
 }

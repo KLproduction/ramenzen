@@ -1,12 +1,17 @@
 "use client";
 
 import { CardWapper } from "./CardWrapper";
-import { BeatLoader } from "react-spinners";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { newVerification } from "@/actions/(auth)/new-verification";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
+
+const Spinner = () => (
+  <div className="flex items-center justify-center">
+    <span className="h-10 w-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+  </div>
+);
 
 const NewVerificationForm = () => {
   const searchParams = useSearchParams();
@@ -31,7 +36,7 @@ const NewVerificationForm = () => {
       .catch(() => {
         setError("Something went wrong!");
       });
-  }, [token, success, error]);
+  }, [token, userId, success, error]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,7 +52,7 @@ const NewVerificationForm = () => {
         backBtnLabel="Back to Login"
       >
         <div className="flex w-full flex-col items-center justify-center gap-5">
-          {!success && !error && <BeatLoader />}
+          {!success && !error && <Spinner />}
 
           <FormSuccess message={success} />
           {!success && <FormError message={error} />}
