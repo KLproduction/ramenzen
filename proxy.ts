@@ -8,12 +8,16 @@ export async function proxy(request: NextRequest) {
   });
 
   if (sessionRes.ok) {
-    return NextResponse.next();
+    const session = await sessionRes.json().catch(() => null);
+
+    if (session?.user) {
+      return NextResponse.next();
+    }
   }
 
   return NextResponse.redirect(new URL("/auth/login", request.url));
 }
 
 export const config = {
-  matcher: ["/setting", "/admin", "/server", "/client"],
+  matcher: ["/admin/:path*", "/auth/setting/:path*"],
 };
